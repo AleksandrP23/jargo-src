@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru" class="page">
+
+@include('partials/head-cabinet-dealer.html')
+
+<body class="page__body">
+  <div class="site-container">
+    <div class="container">
+      <div class="top-shell top-shell--article top-shell--cabinet">
+        @include('partials/header.html')
+      </div>
+      @include('partials/sections/cabinet-scroll-strip.html')
+    </div>
+    <main class="main main--cabinet">
+      <div class="container">
+        @include('partials/sections/cabinet-breadcrumb.html')
+        @include('partials/sections/cabinet-title-tabs-dealer.html')
+        @include('partials/sections/cabinet-dealer-files-toolbar.html')
+        @include('partials/sections/cabinet-dealer-files-list.html')
+        @include('partials/sections/materials-pagination.html')
+      </div>
+    </main>
+    @include('partials/footer.html')
+  </div>
+
+    <div class="graph-modal" aria-hidden="true">
+      @include('partials/auth-modal.html')
+    </div>
+
+</body>
+
+</html>

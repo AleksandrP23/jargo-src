@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru" class="page">
+
+@include('partials/head-catalog.html')
+
+<body class="page__body">
+  <div class="site-container">
+    <div class="container">
+      <div class="top-shell top-shell--article">
+        @include('partials/header.html')
+      </div>
+      @include('partials/sections/catalog-hero.html')
+    </div>
+    <main class="main main--catalog">
+      @include('partials/sections/catalog-subcats.html')
+      @include('partials/sections/catalog-listing.html')
+      @include('partials/sections/catalog-chapter.html')
+      @include('partials/sections/article-opt.html')
+      @include('partials/sections/catalog-figure-hero.html')
+      @include('partials/sections/article-read-more.html')
+      @include('partials/sections/article-text-block.html')
+      @include('partials/sections/catalog-consult.html')
+      @include('partials/sections/chimneys-faq.html')
+      @include('partials/sections/article-tags.html')
+    </main>
+    @include('partials/footer.html')
+    <div class="graph-modal" aria-hidden="true">
+      @include('partials/quiz-modal.html')
+      @include('partials/auth-modal.html')
+
+      <div class="graph-modal__container graph-modal__container--video" role="dialog" aria-modal="true" data-graph-target="video">
+        <button class="btn-reset js-modal-close graph-modal__close" aria-label="Закрыть модалку"></button>
+        <div class="graph-modal__content">
+          <div class="video-modal" data-video-container></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
