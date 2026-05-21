@@ -1,0 +1,54 @@
+<div class="graph-modal__container graph-modal__container--auth" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title" data-graph-target="auth">
+  <button class="btn-reset js-modal-close graph-modal__close graph-modal__close--auth" type="button" aria-label="Закрыть окно">
+    <svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false">
+      <use xlink:href="img/svg/circle-x.svg#circle-x" href="img/svg/circle-x.svg#circle-x"></use>
+    </svg>
+  </button>
+  <div class="graph-modal__content graph-modal__content--auth">
+    <form class="auth-modal" action="#" method="post">
+      <div class="section-head auth-modal__head">
+        <span class="section-head__line section-head__line--left" aria-hidden="true"></span>
+        <h2 class="section-head__title auth-modal__title" id="auth-modal-title">Регистрация</h2>
+        <span class="section-head__line section-head__line--right" aria-hidden="true"></span>
+      </div>
+      <div class="auth-modal__body">
+        <div class="auth-modal__fields">
+          <div class="auth-modal__row auth-modal__row--2">
+            <label class="auth-modal__field">
+              <span class="auth-modal__label">ФИО</span>
+              <input class="auth-modal__input input-reset" type="text" name="auth-name" autocomplete="name" required>
+            </label>
+            <label class="auth-modal__field">
+              <span class="auth-modal__label">ИНН</span>
+              <input class="auth-modal__input input-reset" type="text" name="auth-inn" inputmode="numeric" autocomplete="off" required>
+            </label>
+          </div>
+          <label class="auth-modal__field">
+            <span class="auth-modal__label">Город</span>
+            <input class="auth-modal__input input-reset" type="text" name="auth-city" autocomplete="address-level2" required>
+          </label>
+          <div class="auth-modal__row auth-modal__row--2">
+            <label class="auth-modal__field">
+              <span class="auth-modal__label">Email</span>
+              <input class="auth-modal__input input-reset" type="email" name="auth-email" autocomplete="email" required>
+            </label>
+            <label class="auth-modal__field">
+              <span class="auth-modal__label">Телефон</span>
+              <input class="auth-modal__input input-reset" type="tel" name="auth-phone" autocomplete="tel" required>
+            </label>
+          </div>
+        </div>
+        <label class="auth-modal__consent">
+          <input class="auth-modal__checkbox visually-hidden" type="checkbox" name="auth-consent" required>
+          <span class="auth-modal__checkbox-ui" aria-hidden="true"></span>
+          <span class="auth-modal__consent-text">Я&nbsp;согласен(а) с&nbsp;условиями <a class="auth-modal__consent-link" href="#">Политики</a> на&nbsp;обработку персональных данных</span>
+        </label>
+        <button class="auth-modal__submit btn-reset" type="submit">Зарегистрироваться</button>
+        <div class="auth-modal__footer">
+          <span class="auth-modal__footer-note">У&nbsp;меня уже есть аккаунт</span>
+          <button class="auth-modal__footer-link btn-reset" type="button">Забыли пароль?</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

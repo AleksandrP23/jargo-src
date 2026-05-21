@@ -1,0 +1,200 @@
+.systems {
+  margin-bottom: 70px;
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 15px;
+    gap: 15px;
+
+    .systems-card--grill {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @include tablet {
+    margin-bottom: 50px;
+
+    &__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+      .systems-card--grill {
+        grid-column: auto;
+      }
+    }
+  }
+
+  @include mobile {
+    &__cards {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.systems-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding: 20px;
+  min-height: 250px;
+  text-decoration: none;
+  color: #fff;
+  background-position: center;
+  background-size: cover;
+  background-color: #2c2c2c;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: 10px;
+    background-color: rgb(0 0 0 / 45%);
+    transition: background-color 0.2s ease;
+    pointer-events: none;
+  }
+
+  &:hover::before,
+  &:focus-visible::before {
+    background-color: rgb(0 0 0 / 60%);
+  }
+
+  &:hover .systems-card__title,
+  &:focus-visible .systems-card__title {
+    color: #ed7407;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    &--compact {
+      flex: 1;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+      justify-content: space-between;
+      width: 100%;
+      min-height: 0;
+    }
+  }
+
+  &__arrow-img {
+    flex-shrink: 0;
+    align-self: flex-end;
+    width: 24px;
+    height: 24px;
+  }
+
+  &--bath,
+  &--home,
+  &--chimney {
+    min-height: 400px;
+  }
+
+  &--bath {
+    background-image: url("../img/systems/systems-1.png");
+  }
+
+  &--home {
+    background-image: url("../img/systems/systems-2.png");
+  }
+
+  &--chimney {
+    background-image: url("../img/systems/systems-3.png");
+  }
+
+  &--grill {
+    min-height: 250px;
+    background-image: url("../img/systems/systems-4.png");
+  }
+
+  &--compact {
+    height: 200px;
+    min-height: 200px;
+
+    &::before {
+      background-color: rgb(0 0 0 / 40%);
+    }
+
+    &:hover::before,
+    &:focus-visible::before {
+      background-color: rgb(0 0 0 / 55%);
+    }
+
+    .systems-card__title {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 1.1;
+      text-transform: none;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  @include desktop {
+    &--bath,
+    &--home,
+    &--chimney {
+      min-height: 330px;
+    }
+  }
+
+  @include tablet {
+    &--bath,
+    &--home,
+    &--chimney {
+      min-height: 250px;
+    }
+
+    &__title {
+      font-size: 16px;
+    }
+  }
+
+  @include mobile {
+    padding: 15px 10px;
+
+    &--bath,
+    &--home,
+    &--chimney,
+    &--grill {
+      min-height: 200px;
+    }
+
+    &--compact {
+      height: auto;
+      min-height: 200px;
+    }
+
+    &__title {
+      font-size: 16px;
+    }
+
+    &--compact .systems-card__title {
+      font-size: 16px;
+    }
+  }
+}

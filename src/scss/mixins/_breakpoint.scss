@@ -1,0 +1,39 @@
+/* stylelint-disable */
+/* Брейкпоинты: mobile — 560, tablet — 1024, desktop — 1300 (max), широкий экран — от 1301 */
+
+@mixin for-desktop {
+  @media (min-width: (1301px)) {
+    @content;
+  }
+}
+
+/* Шире максимальной ширины tablet (1024): типовая «десктопная» вёрстка до порога 1300 */
+@mixin above-tablet {
+  @media (min-width: (1025px)) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: (1300px)) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: (1024px)) {
+    @content;
+  }
+}
+
+@mixin small-tablet {
+  @media (max-width: (768px)) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: (560px)) {
+    @content;
+  }
+}

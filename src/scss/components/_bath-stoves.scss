@@ -1,0 +1,345 @@
+
+.bath-series {
+  padding-bottom: 70px;
+
+  @include tablet {
+    padding-bottom: 50px;
+  }
+
+  @include mobile {
+    padding-bottom: 40px;
+  }
+
+  &__head.section-head {
+    margin-bottom: 30px;
+  }
+
+  &__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  &__row {
+    width: 100%;
+  }
+
+  /* Ряд двух карточек: gap 20 */
+  &__compare {
+    display: flex;
+    align-items: stretch;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1400px;
+    gap: 20px;
+  }
+}
+
+.bath-series-card {
+  display: flex;
+  flex: 1 1 calc(50% - 10px);
+  flex-direction: column;
+  padding: 20px;
+  min-width: 0;
+  box-sizing: border-box;
+  background-color: #fff;
+  gap: 12px;
+
+  /* COMPONENT «01»: padding 20; вертикальный gap 12 между блоками */
+  &__top {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  &__figure {
+    flex-shrink: 0;
+    margin: 0;
+
+    img {
+      display: block;
+      width: 176px;
+      height: auto;
+      max-width: 100%;
+    }
+  }
+
+  &__intro {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    gap: 10px;
+  }
+
+  &__category {
+    margin: 0;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.26;
+    color: #585858;
+  }
+
+  &__name-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    gap: 12px;
+  }
+
+  &__name {
+    margin: 0;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.2;
+    color: #363636;
+  }
+
+  &__link {
+    display: flex;
+    flex-shrink: 0;
+    filter: invert(47%) sepia(93%) saturate(1352%) hue-rotate(359deg) brightness(97%) contrast(92%);
+    transition: opacity 0.15s ease;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.85;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #ed7407;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    img {
+      display: block;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__lead {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #585858;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.26;
+    color: #363636;
+    gap: 12px;
+  }
+
+  &__meta-item {
+    margin: 0;
+
+    &--right {
+      flex-shrink: 0;
+      font-weight: 500;
+      text-align: right;
+      color: #585858;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+  }
+
+  &__tag {
+    display: inline-block;
+    border: 1px solid rgb(54 54 54 / 15%);
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 13px;
+    line-height: 1.2;
+    color: #363636;
+    background-color: rgb(255 255 255 / 80%);
+  }
+
+  &__rule {
+    margin: 0;
+    border: 0;
+    height: 1px;
+    background-color: rgb(54 54 54 / 12%);
+  }
+
+  &__bullets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Строки буллетов: gap 8 */
+  &__bullet {
+    position: relative;
+    margin: 0 0 8px;
+    padding-left: 14px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: #363636;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      border-radius: 50%;
+      width: 5px;
+      height: 5px;
+      background-color: #ed7407;
+    }
+  }
+
+  &__metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__metrics-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 40px;
+  }
+
+  &__metric {
+    min-width: 0;
+  }
+
+  &__metric-label {
+    margin: 0 0 8px;
+    font-size: 11px;
+    line-height: 1.2;
+    text-align: center;
+    color: #999;
+  }
+
+  &__metric-body {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__metric-icon {
+    display: block;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+  }
+
+  &__segments {
+    display: flex;
+    flex: 1;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    gap: 5px;
+  }
+
+  &__seg {
+    flex-shrink: 0;
+    border-radius: 1px;
+    width: 42px;
+    height: 6px;
+    background-color: rgb(237 116 7 / 25%);
+
+    &--on {
+      background-color: #ed7407;
+    }
+  }
+
+  &__note {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #777;
+  }
+
+  @include tablet {
+    &__metrics-row {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    &__top {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    &__intro {
+      width: 100%;
+    }
+
+    &__name-row {
+      justify-content: center;
+    }
+
+    &__tags {
+      justify-content: center;
+    }
+
+    &__meta {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    &__meta-item--right {
+      text-align: center;
+    }
+
+    &__bullet {
+      text-align: left;
+    }
+  }
+
+  @include mobile {
+    padding: 16px;
+
+    &__name {
+      font-size: 18px;
+    }
+
+    &__segments {
+      gap: 3px;
+    }
+
+    &__seg {
+      width: min(42px, calc((100% - 20px) / 5));
+      max-width: 42px;
+    }
+  }
+}
+
+@include tablet {
+  .bath-series__compare {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .bath-series-card {
+    flex: 1 1 auto;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 690px;
+  }
+}

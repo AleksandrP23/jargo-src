@@ -1,0 +1,26 @@
+// базовые подключения
+@import "vars";
+@import "mixins";
+@import "fonts";
+@import "settings";
+
+// подключения компонентов страницы
+@import "./components/base-ui";
+@import "./components/header";
+@import "./components/hero";
+@import "./components/systems";
+@import "./components/products";
+@import "./components/production";
+@import "./components/academy";
+@import "./components/quiz";
+@import "./components/footer";
+@import "./components/catalog";
+@import "./components/page-404";
+@import "./components/bath-stoves";
+@import "./components/bath-product";
+@import "./components/article";
+@import "./components/price";
+@import "./components/materials";
+@import "./components/cabinet";
+@import "./components/checkout";
+@import "./components/auth-modal";

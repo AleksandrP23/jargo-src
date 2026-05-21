@@ -1,0 +1,255 @@
+
+.graph-modal__container--auth {
+  position: relative;
+  border-radius: 20px;
+  padding: 30px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.graph-modal__content--auth {
+  overflow: visible;
+  padding: 0;
+}
+
+.graph-modal__close--auth {
+  right: 0;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  background-image: none;
+
+  svg {
+    display: block;
+    width: 36px;
+    height: 36px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #ed7407;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+.auth-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__head {
+    margin-bottom: 0;
+    gap: 40px;
+  }
+
+  &__title {
+    font-size: 30px;
+    line-height: 1.2;
+    text-transform: none;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__row {
+    display: grid;
+    gap: 10px;
+
+    &--2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 5px;
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 5px;
+  }
+
+  &__label {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.3;
+    color: #585858;
+  }
+
+  &__input {
+    border: 0.5px solid rgb(88 88 88 / 60%);
+    border-radius: 5px;
+    padding: 10px 15px;
+    width: 100%;
+    min-height: 44px;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.3;
+    color: #363636;
+    background: #fff;
+
+    &::placeholder {
+      color: #a8a8a8;
+    }
+
+    &:focus {
+      outline: 2px solid #ed7407;
+      outline-offset: 0;
+      border-color: transparent;
+    }
+  }
+
+  &__consent {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    gap: 5px;
+  }
+
+  &__checkbox-ui {
+    position: relative;
+    flex-shrink: 0;
+    margin-top: 1px;
+    border: 0.89px solid #ed7407;
+    border-radius: 2px;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 3px;
+      border-bottom: 1.5px solid #ed7407;
+      border-left: 1.5px solid #ed7407;
+      width: 9px;
+      height: 6px;
+      background: transparent;
+      opacity: 0;
+      transform: rotate(-45deg);
+    }
+  }
+
+  &__checkbox:checked + &__checkbox-ui::after {
+    opacity: 1;
+  }
+
+  &__checkbox:focus-visible + &__checkbox-ui {
+    outline: 2px solid #ed7407;
+    outline-offset: 2px;
+  }
+
+  &__consent-text {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.3;
+    color: #585858;
+  }
+
+  &__consent-link {
+    text-decoration: underline;
+    color: inherit;
+    text-underline-offset: 2px;
+
+    &:hover,
+    &:focus-visible {
+      color: #ed7407;
+    }
+  }
+
+  &__submit {
+    align-self: center;
+    padding: 0;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.2;
+    text-decoration: underline;
+    color: #ed7407;
+    background: transparent;
+    text-underline-offset: 2px;
+
+    &:hover,
+    &:focus-visible {
+      color: #103a2c;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #ed7407;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  &__footer-note {
+    font-size: 16px;
+    line-height: 1.2;
+    color: rgb(88 88 88 / 60%);
+  }
+
+  &__footer-link {
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.2;
+    text-align: right;
+    color: rgb(88 88 88 / 60%);
+    background: transparent;
+
+    &:hover,
+    &:focus-visible {
+      color: #ed7407;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #ed7407;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  @include tablet {
+    &__title {
+      font-size: 25px;
+    }
+  }
+
+  @include mobile {
+    &__head {
+      gap: 20px;
+    }
+
+    &__title {
+      font-size: 20px;
+    }
+
+    &__row--2 {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    &__footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__footer-link {
+      text-align: left;
+    }
+  }
+}
