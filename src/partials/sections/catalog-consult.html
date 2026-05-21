@@ -1,0 +1,32 @@
+<section class="catalog-consult" aria-labelledby="catalog-consult-title">
+  <div class="container">
+    <div class="catalog-consult__shell">
+      <h2 class="catalog-consult__title" id="catalog-consult-title">получить консультацию</h2>
+      <p class="catalog-consult__lead">Оставьте контакты и наши менеджеры обязательно вам перезвонят</p>
+      <form class="catalog-consult__form" action="#" method="post">
+        <div class="catalog-consult__fields">
+          <label class="catalog-consult__field">
+            <span class="visually-hidden">Имя</span>
+            <input class="catalog-consult__input input-reset" type="text" name="name" placeholder="Имя" autocomplete="name">
+          </label>
+          <label class="catalog-consult__field">
+            <span class="visually-hidden">Телефон</span>
+            <input class="catalog-consult__input input-reset" type="tel" name="phone" placeholder="Телефон" autocomplete="tel">
+          </label>
+          <label class="catalog-consult__field catalog-consult__field--message">
+            <span class="visually-hidden">Ваш вопрос</span>
+            <input class="catalog-consult__input input-reset" type="text" name="message" placeholder="Ваш вопрос">
+          </label>
+        </div>
+        <div class="catalog-consult__bottom">
+          <label class="catalog-consult__consent">
+            <input class="catalog-consult__checkbox visually-hidden" type="checkbox" name="consent" value="1" required>
+            <span class="catalog-consult__checkbox-ui" aria-hidden="true"></span>
+            <span class="catalog-consult__consent-text">Я согласен(а) с условиями Политики на обработку персональных данных</span>
+          </label>
+          <button class="catalog-consult__submit btn-reset" type="submit">Отправить заявку</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

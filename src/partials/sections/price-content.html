@@ -1,0 +1,89 @@
+<div class="price-page">
+  <div class="price-page__products">
+    @include('products.html')
+  </div>
+
+  @include('price-toolbar.html')
+  @include('price-series-nav.html')
+
+  <div class="container price-page__body">
+    <section class="price-spotlight" aria-labelledby="price-spotlight-title">
+      <h2 class="price-spotlight__title" id="price-spotlight-title">Подзаголовок&nbsp;с&nbsp;названием серии</h2>
+      <div class="price-spotlight__filters" role="group" aria-label="Фильтры таблицы">
+        <button class="price-spotlight__filter btn-reset" type="button">
+          <span>Толщина металла</span>
+          <span class="price-spotlight__filter-sort" aria-hidden="true"></span>
+        </button>
+        <button class="price-spotlight__filter btn-reset" type="button">
+          <span>Диаметр</span>
+          <span class="price-spotlight__filter-sort" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="article-body__table-wrap price-table-wrap">
+        <table class="article-body__table price-table price-table--featured">
+          <tbody>
+            <tr>
+              <td>Модификация</td>
+              <td>Осн. характеристики</td>
+              <td><span class="price-table__stock price-table__stock--many">Много</span></td>
+              <td class="price-table__price">111&nbsp;111&nbsp;111&nbsp;₽</td>
+              <td class="price-table__action">
+                <button class="price-table__cart-icon btn-reset" type="button">В&nbsp;заявку</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Модификация</td>
+              <td>Осн. характеристики</td>
+              <td><span class="price-table__stock price-table__stock--few">Мало</span></td>
+              <td class="price-table__price">111&nbsp;111&nbsp;111&nbsp;₽</td>
+              <td class="price-table__action">
+                <button class="price-table__cart-icon btn-reset" type="button">В&nbsp;заявку</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Модификация</td>
+              <td>Осн. характеристики</td>
+              <td><span class="price-table__stock price-table__stock--order">Под заказ</span></td>
+              <td class="price-table__price">111&nbsp;111&nbsp;111&nbsp;₽</td>
+              <td class="price-table__action">
+                <button class="price-table__cart-icon btn-reset" type="button">В&nbsp;заявку</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Модификация</td>
+              <td>Осн. характеристики</td>
+              <td><span class="price-table__stock price-table__stock--many">Много</span></td>
+              <td class="price-table__price">111&nbsp;111&nbsp;111&nbsp;₽</td>
+              <td class="price-table__action">
+                <button class="price-table__cart-icon btn-reset" type="button">В&nbsp;заявку</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Модификация</td>
+              <td>Осн. характеристики</td>
+              <td><span class="price-table__stock price-table__stock--many">Много</span></td>
+              <td class="price-table__price">111&nbsp;111&nbsp;111&nbsp;₽</td>
+              <td class="price-table__action">
+                <button class="price-table__cart-icon btn-reset" type="button">В&nbsp;заявку</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Модификация</td>
+              <td>Осн. характеристики</td>
+              <td><span class="price-table__stock price-table__stock--many">Много</span></td>
+              <td class="price-table__price">111&nbsp;111&nbsp;111&nbsp;₽</td>
+              <td class="price-table__action">
+                <button class="price-table__cart-icon btn-reset" type="button">В&nbsp;заявку</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    @include('price-group-matrix.html')
+    @include('price-group-matrix.html')
+    @include('price-group-matrix.html')
+  </div>
+
+</div>

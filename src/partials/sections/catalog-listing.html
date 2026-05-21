@@ -1,0 +1,358 @@
+<section class="catalog-listing" data-catalog-listing aria-label="Каталог товаров">
+  <div class="container">
+    <div class="catalog-listing__layout">
+      <div class="catalog-filter__backdrop" data-catalog-filter-backdrop aria-hidden="true"></div>
+      <aside
+        class="catalog-filter"
+        id="catalog-filter-panel"
+        data-catalog-filter-panel
+        aria-labelledby="catalog-filter-heading"
+      >
+        <div class="catalog-filter__head">
+          <h2 class="catalog-filter__heading" id="catalog-filter-heading">Фильтр</h2>
+          <button
+            class="catalog-filter__close btn-reset"
+            type="button"
+            data-catalog-filter-close
+            aria-label="Закрыть фильтр"
+          ><span aria-hidden="true">×</span></button>
+        </div>
+
+        <div class="catalog-filter__group">
+          <h3 class="catalog-filter__subtitle">Объем парильного помещения</h3>
+          <div class="catalog-filter__range">
+            <label class="catalog-filter__range-field">
+              <span class="catalog-filter__range-prefix">min</span>
+              <input class="catalog-filter__range-input input-reset" type="number" value="0">
+              <span class="catalog-filter__range-unit">м2</span>
+            </label>
+            <span class="catalog-filter__range-dash" aria-hidden="true">—</span>
+            <label class="catalog-filter__range-field">
+              <span class="catalog-filter__range-prefix">max</span>
+              <input class="catalog-filter__range-input input-reset" type="number" value="0">
+              <span class="catalog-filter__range-unit">м2</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="catalog-filter__group">
+          <h3 class="catalog-filter__subtitle">Рекомендуемый режим бани</h3>
+          <ul class="catalog-filter__options list-reset">
+            <li class="catalog-filter__row">
+              <input id="cf-mode-1" class="catalog-filter__checkbox visually-hidden" type="radio" name="filter-mode" checked>
+              <label class="catalog-filter__label" for="cf-mode-1">
+                <span class="catalog-filter__box">
+                  <span class="catalog-filter__control" aria-hidden="true"></span>
+                  <span class="catalog-filter__text">Русская</span>
+                </span>
+              </label>
+            </li>
+            <li class="catalog-filter__row">
+              <input id="cf-mode-2" class="catalog-filter__checkbox visually-hidden" type="radio" name="filter-mode">
+              <label class="catalog-filter__label" for="cf-mode-2">
+                <span class="catalog-filter__box">
+                  <span class="catalog-filter__control" aria-hidden="true"></span>
+                  <span class="catalog-filter__text">Финская</span>
+                </span>
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="catalog-filter__group">
+          <h3 class="catalog-filter__subtitle">Тип каменки</h3>
+          <ul class="catalog-filter__options list-reset">
+            <li class="catalog-filter__row"><label class="catalog-filter__check"><input class="catalog-filter__tick visually-hidden" type="checkbox" checked><span class="catalog-filter__check-icon"></span><span class="catalog-filter__check-text">Закрытая</span></label></li>
+            <li class="catalog-filter__row"><label class="catalog-filter__check"><input class="catalog-filter__tick visually-hidden" type="checkbox"><span class="catalog-filter__check-icon"></span><span class="catalog-filter__check-text">Открытая</span></label></li>
+            <li class="catalog-filter__row"><label class="catalog-filter__check"><input class="catalog-filter__tick visually-hidden" type="checkbox"><span class="catalog-filter__check-icon"></span><span class="catalog-filter__check-text">Закрытая / Открытая</span></label></li>
+          </ul>
+        </div>
+
+        <div class="catalog-filter__group">
+          <div class="catalog-filter__title-row">
+            <h3 class="catalog-filter__subtitle">Тип топки</h3>
+            <button class="catalog-filter__title-toggle btn-reset" type="button" aria-label="Свернуть блок"></button>
+          </div>
+          <ul class="catalog-filter__options list-reset">
+            <li class="catalog-filter__row"><label class="catalog-filter__check"><input class="catalog-filter__tick visually-hidden" type="checkbox" checked><span class="catalog-filter__check-icon"></span><span class="catalog-filter__check-text">Выносная</span></label></li>
+            <li class="catalog-filter__row"><label class="catalog-filter__check"><input class="catalog-filter__tick visually-hidden" type="checkbox"><span class="catalog-filter__check-icon"></span><span class="catalog-filter__check-text">Короткая</span></label></li>
+            <li class="catalog-filter__row"><label class="catalog-filter__check"><input class="catalog-filter__tick visually-hidden" type="checkbox"><span class="catalog-filter__check-icon"></span><span class="catalog-filter__check-text">Короткая</span></label></li>
+            <li class="catalog-filter__row"><label class="catalog-filter__check"><input class="catalog-filter__tick visually-hidden" type="checkbox"><span class="catalog-filter__check-icon"></span><span class="catalog-filter__check-text">Короткая</span></label></li>
+            <li class="catalog-filter__row"><label class="catalog-filter__check"><input class="catalog-filter__tick visually-hidden" type="checkbox"><span class="catalog-filter__check-icon"></span><span class="catalog-filter__check-text">Короткая</span></label></li>
+            <li class="catalog-filter__row"><label class="catalog-filter__check"><input class="catalog-filter__tick visually-hidden" type="checkbox"><span class="catalog-filter__check-icon"></span><span class="catalog-filter__check-text">Короткая</span></label></li>
+          </ul>
+          <button class="catalog-filter__show-more btn-reset" type="button">Показать еще</button>
+        </div>
+
+        <div class="catalog-filter__group">
+          <h3 class="catalog-filter__subtitle">Тип дверцы</h3>
+          <ul class="catalog-filter__options list-reset">
+            <li class="catalog-filter__row"><label class="catalog-filter__check"><input class="catalog-filter__tick visually-hidden" type="checkbox" checked><span class="catalog-filter__check-icon"></span><span class="catalog-filter__check-text">Со стеклом</span></label></li>
+            <li class="catalog-filter__row"><label class="catalog-filter__check"><input class="catalog-filter__tick visually-hidden" type="checkbox"><span class="catalog-filter__check-icon"></span><span class="catalog-filter__check-text">Без стекла</span></label></li>
+            <li class="catalog-filter__row"><label class="catalog-filter__check"><input class="catalog-filter__tick visually-hidden" type="checkbox"><span class="catalog-filter__check-icon"></span><span class="catalog-filter__check-text">Панорама</span></label></li>
+          </ul>
+        </div>
+
+        <div class="catalog-filter__group">
+          <h3 class="catalog-filter__subtitle">Материал</h3>
+          <ul class="catalog-filter__options list-reset">
+            <li class="catalog-filter__row"><label class="catalog-filter__check"><input class="catalog-filter__tick visually-hidden" type="checkbox" checked><span class="catalog-filter__check-icon"></span><span class="catalog-filter__check-text">Конструкционная сталь</span></label></li>
+            <li class="catalog-filter__row"><label class="catalog-filter__check"><input class="catalog-filter__tick visually-hidden" type="checkbox"><span class="catalog-filter__check-icon"></span><span class="catalog-filter__check-text">Чугун</span></label></li>
+            <li class="catalog-filter__row"><label class="catalog-filter__check"><input class="catalog-filter__tick visually-hidden" type="checkbox"><span class="catalog-filter__check-icon"></span><span class="catalog-filter__check-text">Нержавейка</span></label></li>
+          </ul>
+        </div>
+
+        <button class="catalog-filter__reset btn-reset" type="button">Сбросить все параметры</button>
+      </aside>
+
+      <div class="catalog-listing__main">
+        <div class="catalog-toolbar">
+          <button
+            class="catalog-toolbar__filter btn-reset"
+            type="button"
+            id="catalog-filter-open-btn"
+            data-catalog-filter-open
+            aria-expanded="false"
+            aria-controls="catalog-filter-panel"
+          >
+            <svg
+              class="catalog-toolbar__filter-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 32 32"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <use xlink:href="img/svg/filter.svg#icon-filter" href="img/svg/filter.svg#icon-filter" />
+            </svg>
+            <span class="catalog-toolbar__filter-text">Фильтр</span>
+          </button>
+          <div class="catalog-sort" data-catalog-sort aria-label="Сортировка товаров">
+            <span class="catalog-sort__label" id="catalog-sort-label">Сортировать:</span>
+            <div class="catalog-sort__control">
+              <button
+                class="catalog-sort__toggle btn-reset"
+                type="button"
+                id="catalog-sort-toggle"
+                aria-labelledby="catalog-sort-label catalog-sort-value"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-controls="catalog-sort-dropdown"
+                data-catalog-sort-toggle
+              >
+                <span class="catalog-sort__value" id="catalog-sort-value" data-catalog-sort-value>По умолчанию</span>
+              </button>
+              <div
+                class="catalog-sort__dropdown"
+                id="catalog-sort-dropdown"
+                role="listbox"
+                aria-labelledby="catalog-sort-label"
+                aria-hidden="true"
+                data-catalog-sort-dropdown
+              >
+                <button class="catalog-sort__option catalog-sort__option--active btn-reset" type="button" role="option" data-catalog-sort-option>По умолчанию</button>
+                <button class="catalog-sort__option btn-reset" type="button" role="option" data-catalog-sort-option>По алфавиту от&nbsp;А до&nbsp;Я</button>
+                <button class="catalog-sort__option btn-reset" type="button" role="option" data-catalog-sort-option>По алфавиту от&nbsp;Я до&nbsp;А</button>
+              </div>
+            </div>
+          </div>
+          <div class="catalog-view" data-catalog-view aria-label="Вид каталога">
+            <button
+              class="catalog-view__btn catalog-view__btn--grid catalog-view__btn--active btn-reset"
+              type="button"
+              aria-label="Сетка"
+              aria-pressed="true"
+              data-catalog-view="grid"
+            >
+              <svg
+                class="catalog-view__icon"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <use xlink:href="img/svg/icon-grid.svg#icon-grid" href="img/svg/icon-grid.svg#icon-grid" />
+              </svg>
+            </button>
+            <button
+              class="catalog-view__btn catalog-view__btn--list btn-reset"
+              type="button"
+              aria-label="Список"
+              aria-pressed="false"
+              data-catalog-view="list"
+            >
+              <svg
+                class="catalog-view__icon"
+                width="24"
+                height="20"
+                viewBox="0 0 24 20"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <use xlink:href="img/svg/icon-line.svg#icon-line" href="img/svg/icon-line.svg#icon-line" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <ul class="catalog-grid list-reset" data-catalog-grid>
+          <li class="catalog-grid__cell">
+            <article class="catalog-card">
+              <a class="catalog-card__media" href="#">
+                <picture>
+                  <source srcset="img/home/product-chimney.webp" type="image/webp">
+                  <img src="img/home/product-chimney.png" width="280" height="200" loading="lazy" alt="">
+                </picture>
+              </a>
+              <div class="catalog-card__content">
+                <h3 class="catalog-card__title"><a class="catalog-card__title-link" href="#">Сэндвич-дымоход Ø115</a></h3>
+                <p class="catalog-card__desc">Основные характеристики тоже может быить в 2 или 3 строки</p>
+              </div>
+              <img class="catalog-card__chevron" src="img/svg/arrow.svg" width="12" height="12" alt="" aria-hidden="true">
+            </article>
+          </li>
+          <li class="catalog-grid__cell">
+            <article class="catalog-card">
+              <a class="catalog-card__media" href="#">
+                <picture>
+                  <source srcset="img/home/product-chimney.webp" type="image/webp">
+                  <img src="img/home/product-chimney.png" width="280" height="200" loading="lazy" alt="">
+                </picture>
+              </a>
+              <div class="catalog-card__content">
+              <h3 class="catalog-card__title"><a class="catalog-card__title-link" href="#">Сэндвич-дымоход Ø130</a></h3>
+              <p class="catalog-card__desc">Основные характеристики тоже может быить в 2 или 3 строки</p>
+              </div>
+              <img class="catalog-card__chevron" src="img/svg/arrow.svg" width="12" height="12" alt="" aria-hidden="true">
+            </article>
+          </li>
+          <li class="catalog-grid__cell">
+            <article class="catalog-card">
+              <a class="catalog-card__media" href="#">
+                <picture>
+                  <source srcset="img/home/product-chimney.webp" type="image/webp">
+                  <img src="img/home/product-chimney.png" width="280" height="200" loading="lazy" alt="">
+                </picture>
+              </a>
+              <div class="catalog-card__content">
+              <h3 class="catalog-card__title"><a class="catalog-card__title-link" href="#">Комплект прохода кровли</a></h3>
+              <p class="catalog-card__desc">Основные характеристики тоже может быить в 2 или 3 строки</p>
+              </div>
+              <img class="catalog-card__chevron" src="img/svg/arrow.svg" width="12" height="12" alt="" aria-hidden="true">
+            </article>
+          </li>
+          <li class="catalog-grid__cell">
+            <article class="catalog-card">
+              <a class="catalog-card__media" href="#">
+                <picture>
+                  <source srcset="img/home/product-chimney.webp" type="image/webp">
+                  <img src="img/home/product-chimney.png" width="280" height="200" loading="lazy" alt="">
+                </picture>
+              </a>
+              <div class="catalog-card__content">
+              <h3 class="catalog-card__title"><a class="catalog-card__title-link" href="#">Флюгерная насадка</a></h3>
+              <p class="catalog-card__desc">Основные характеристики тоже может быить в 2 или 3 строки</p>
+              </div>
+              <img class="catalog-card__chevron" src="img/svg/arrow.svg" width="12" height="12" alt="" aria-hidden="true">
+            </article>
+          </li>
+          <li class="catalog-grid__cell">
+            <article class="catalog-card">
+              <a class="catalog-card__media" href="#">
+                <picture>
+                  <source srcset="img/home/product-chimney.webp" type="image/webp">
+                  <img src="img/home/product-chimney.png" width="280" height="200" loading="lazy" alt="">
+                </picture>
+              </a>
+              <div class="catalog-card__content">
+              <h3 class="catalog-card__title"><a class="catalog-card__title-link" href="#">Тройник 45°</a></h3>
+              <p class="catalog-card__desc">Основные характеристики тоже может быить в 2 или 3 строки</p>
+              </div>
+              <img class="catalog-card__chevron" src="img/svg/arrow.svg" width="12" height="12" alt="" aria-hidden="true">
+            </article>
+          </li>
+          <li class="catalog-grid__cell">
+            <article class="catalog-card">
+              <a class="catalog-card__media" href="#">
+                <picture>
+                  <source srcset="img/home/product-chimney.webp" type="image/webp">
+                  <img src="img/home/product-chimney.png" width="280" height="200" loading="lazy" alt="">
+                </picture>
+              </a>
+              <div class="catalog-card__content">
+              <h3 class="catalog-card__title"><a class="catalog-card__title-link" href="#">Заглушка верхняя</a></h3>
+              <p class="catalog-card__desc">Основные характеристики тоже может быить в 2 или 3 строки</p>
+              </div>
+              <img class="catalog-card__chevron" src="img/svg/arrow.svg" width="12" height="12" alt="" aria-hidden="true">
+            </article>
+          </li>
+          <li class="catalog-grid__cell">
+            <article class="catalog-card">
+              <a class="catalog-card__media" href="#">
+                <picture><source srcset="img/home/product-chimney.webp" type="image/webp"><img src="img/home/product-chimney.png" width="280" height="200" loading="lazy" alt=""></picture>
+              </a>
+              <div class="catalog-card__content">
+              <h3 class="catalog-card__title"><a class="catalog-card__title-link" href="#">Система двуконтурных дымоходов Standard 550°</a></h3>
+              <p class="catalog-card__desc">Основные характеристики тоже может быить в 2 или 3 строки</p>
+              </div>
+              <img class="catalog-card__chevron" src="img/svg/arrow.svg" width="12" height="12" alt="" aria-hidden="true">
+            </article>
+          </li>
+          <li class="catalog-grid__cell">
+            <article class="catalog-card">
+              <a class="catalog-card__media" href="#">
+                <picture><source srcset="img/home/product-chimney.webp" type="image/webp"><img src="img/home/product-chimney.png" width="280" height="200" loading="lazy" alt=""></picture>
+              </a>
+              <div class="catalog-card__content">
+              <h3 class="catalog-card__title"><a class="catalog-card__title-link" href="#">Система двуконтурных дымоходов Standard 550°</a></h3>
+              <p class="catalog-card__desc">Основные характеристики тоже может быить в 2 или 3 строки</p>
+              </div>
+              <img class="catalog-card__chevron" src="img/svg/arrow.svg" width="12" height="12" alt="" aria-hidden="true">
+            </article>
+          </li>
+          <li class="catalog-grid__cell">
+            <article class="catalog-card">
+              <a class="catalog-card__media" href="#">
+                <picture><source srcset="img/home/product-chimney.webp" type="image/webp"><img src="img/home/product-chimney.png" width="280" height="200" loading="lazy" alt=""></picture>
+              </a>
+              <div class="catalog-card__content">
+              <h3 class="catalog-card__title"><a class="catalog-card__title-link" href="#">Система двуконтурных дымоходов Standard 550°</a></h3>
+              <p class="catalog-card__desc">Основные характеристики тоже может быить в 2 или 3 строки</p>
+              </div>
+              <img class="catalog-card__chevron" src="img/svg/arrow.svg" width="12" height="12" alt="" aria-hidden="true">
+            </article>
+          </li>
+          <li class="catalog-grid__cell">
+            <article class="catalog-card">
+              <a class="catalog-card__media" href="#">
+                <picture><source srcset="img/home/product-chimney.webp" type="image/webp"><img src="img/home/product-chimney.png" width="280" height="200" loading="lazy" alt=""></picture>
+              </a>
+              <div class="catalog-card__content">
+              <h3 class="catalog-card__title"><a class="catalog-card__title-link" href="#">Система двуконтурных дымоходов Standard 550°</a></h3>
+              <p class="catalog-card__desc">Основные характеристики тоже может быить в 2 или 3 строки</p>
+              </div>
+              <img class="catalog-card__chevron" src="img/svg/arrow.svg" width="12" height="12" alt="" aria-hidden="true">
+            </article>
+          </li>
+        </ul>
+
+        <nav class="catalog-pagination" aria-label="Страницы каталога">
+          <ul class="catalog-pagination__list list-reset">
+            <li><a class="catalog-pagination__link catalog-pagination__link--current" href="#" aria-current="page">1</a></li>
+            <li><a class="catalog-pagination__link" href="#">2</a></li>
+            <li><a class="catalog-pagination__link" href="#">3</a></li>
+            <li><span class="catalog-pagination__ellipsis" aria-hidden="true">…</span></li>
+            <li><a class="catalog-pagination__link" href="#">99</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>

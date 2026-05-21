@@ -1,0 +1,26 @@
+<div class="price-toolbar" data-price-toolbar>
+  <div class="container">
+    <div class="price-toolbar__inner">
+      <div class="price-toolbar__modes">
+        <span class="price-toolbar__label">розничные цены, ₽</span>
+        <button
+          class="price-toolbar__switch btn-reset"
+          type="button"
+          role="switch"
+          aria-checked="false"
+          aria-label="Переключить тип цен"
+          data-price-mode-switch
+        ></button>
+        <span class="price-toolbar__label price-toolbar__label--muted">Цены с&nbsp;вашей скидкой, ₽</span>
+      </div>
+      <label class="price-toolbar__markup">
+        <span class="price-toolbar__markup-label">Наценка,%</span>
+        <span class="price-toolbar__markup-field">
+          <input class="price-toolbar__markup-input" type="text" inputmode="decimal" value="0" aria-label="Наценка в процентах" data-price-markup>
+          <button class="price-toolbar__markup-clear btn-reset" type="button" aria-label="Сбросить наценку">×</button>
+        </span>
+      </label>
+      <a class="price-toolbar__download" href="#" download>Скачать прайс-лист</a>
+    </div>
+  </div>
+</div>
