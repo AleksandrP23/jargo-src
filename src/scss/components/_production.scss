@@ -132,10 +132,6 @@
   @include tablet {
     margin-bottom: 50px;
 
-    &__inner {
-      display: block;
-    }
-
     &__content {
       padding: 30px 15px 20px;
     }
@@ -153,13 +149,19 @@
       font-size: 16px;
     }
 
-    &__gallery {
-      display: none;
-    }
-
     &__price {
       padding: 26px;
       font-size: 20px;
+    }
+  }
+
+  @include medium-tablet {
+    &__inner {
+      display: block;
+    }
+
+    &__gallery {
+      display: none;
     }
   }
 

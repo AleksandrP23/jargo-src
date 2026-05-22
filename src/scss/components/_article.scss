@@ -774,6 +774,7 @@
       font-size: 22px;
       line-height: 1.2;
       color: #363636;
+      text-transform: uppercase;
     }
 
     p {
@@ -1236,7 +1237,6 @@
     }
 
     h2 {
-      margin-top: 32px;
       font-size: 20px;
     }
 
@@ -1329,13 +1329,14 @@
 
     &__table {
       border-radius: 16px;
-      min-width: 100%;
+      min-width: 511px;
       font-size: 16px;
       line-height: 28px;
 
       th,
       td {
         padding: 10px 15px;
+        vertical-align: middle;
       }
 
       th {
@@ -1343,22 +1344,41 @@
         font-size: 16px;
         line-height: 1.2;
       }
+
+      th:nth-child(3),
+      td:nth-child(3) {
+        white-space: nowrap;
+      }
     }
 
     &__highlight {
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 36px minmax(0, 1fr);
+      grid-template-rows: auto auto;
       padding: 10px;
       gap: 10px;
     }
 
+    &__highlight-icon {
+      align-self: center;
+      grid-column: 1;
+      grid-row: 1;
+    }
+
     &__highlight-text {
+      align-self: start;
+      grid-column: 2;
+      grid-row: 1;
       font-size: 16px;
+      line-height: 1.4;
     }
 
     &__highlight-link {
+      grid-column: 1 / -1;
+      grid-row: 2;
       font-size: 16px;
+      line-height: 1.2;
     }
 
     &__block-head {
@@ -1458,7 +1478,7 @@
   @include mobile {
     .academy-video__preview {
       border-radius: 10px;
-      padding: 10px;
+      padding: 0;
       max-height: none;
       aspect-ratio: 320 / 250;
     }
@@ -1473,7 +1493,7 @@
     }
 
     .academy-video__meta {
-      margin-top: 15px;
+      margin-top: 0;
 
       h3 {
         font-weight: 500;
@@ -2332,6 +2352,7 @@
     &__info {
       font-size: 15px;
       line-height: 1.1;
+      flex: 1 1 auto;
     }
 
     &__map-link {
@@ -2438,6 +2459,60 @@
 
     &__title {
       font-size: 20px;
+    }
+  }
+
+  &--wholesale {
+    .article-strip__inner {
+      justify-content: center;
+      border: 1px solid #fff;
+      padding: 30px 20px;
+      background: #12392c;
+      gap: 60px;
+    }
+
+    .article-strip__title {
+      flex: 1 1 auto;
+      max-width: none;
+    }
+
+    .article-strip__cta {
+      flex-shrink: 0;
+      font-size: 20px;
+    }
+
+    @include tablet {
+      .article-strip__inner {
+        flex-direction: row;
+        align-items: center;
+        border-radius: 10px;
+        padding: 20px 15px;
+        gap: 20px;
+      }
+
+      .article-strip__title {
+        font-size: 25px;
+      }
+
+      .article-strip__cta {
+        font-size: 16px;
+      }
+    }
+
+    @include mobile {
+      .article-strip__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .article-strip__title {
+        font-size: 18px;
+      }
+
+      .article-strip__cta {
+        font-size: 16px;
+      }
     }
   }
 }
