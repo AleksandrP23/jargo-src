@@ -1,0 +1,56 @@
+<div class="graph-modal__container graph-modal__container--consult" role="dialog" aria-modal="true" aria-labelledby="consult-modal-title" data-graph-target="consult">
+  <button class="btn-reset js-modal-close graph-modal__close graph-modal__close--consult" type="button" aria-label="Закрыть окно">
+    <svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false">
+      <use xlink:href="img/svg/circle-x.svg#circle-x" href="img/svg/circle-x.svg#circle-x"></use>
+    </svg>
+  </button>
+  <div class="graph-modal__content graph-modal__content--consult">
+    <form class="auth-modal consult-modal" action="#" method="post">
+      <div class="section-head auth-modal__head">
+        <span class="section-head__line section-head__line--left" aria-hidden="true"></span>
+        <h2 class="section-head__title auth-modal__title" id="consult-modal-title">Консультация</h2>
+        <span class="section-head__line section-head__line--right" aria-hidden="true"></span>
+      </div>
+      <p class="consult-modal__lead">Оставьте свои данные и&nbsp;менеджер вам перезвонит</p>
+      <div class="auth-modal__body">
+        <div class="auth-modal__fields">
+          <div class="auth-modal__row auth-modal__row--2">
+            <label class="auth-modal__field">
+              <span class="auth-modal__label">Имя</span>
+              <input class="auth-modal__input input-reset" type="text" name="consult-name" autocomplete="name" required>
+            </label>
+            <label class="auth-modal__field">
+              <span class="auth-modal__label">Телефон</span>
+              <input class="auth-modal__input input-reset" type="tel" name="consult-phone" autocomplete="tel" required>
+            </label>
+          </div>
+          <div class="auth-modal__field consult-modal__field--messenger">
+            <span class="auth-modal__label">Мессенджер</span>
+            <div class="consult-modal__messenger-row">
+              <div class="consult-modal__messengers" role="group" aria-label="Мессенджер" data-consult-messenger>
+                <button class="btn-reset consult-modal__messenger-btn consult-modal__messenger-btn--active" type="button" data-messenger="max" aria-pressed="true" aria-label="MAX">
+                  <svg class="consult-modal__messenger-icon consult-modal__messenger-icon--max" width="24" height="24" aria-hidden="true">
+                    <use href="img/sprite.svg#logo-max"></use>
+                  </svg>
+                </button>
+                <button class="btn-reset consult-modal__messenger-btn" type="button" data-messenger="tg" aria-pressed="false" aria-label="Telegram">
+                  <svg class="consult-modal__messenger-icon consult-modal__messenger-icon--tg" width="24" height="24" aria-hidden="true">
+                    <use href="img/sprite.svg#logo-tg"></use>
+                  </svg>
+                </button>
+                <input type="hidden" name="consult-messenger" value="max">
+              </div>
+              <input class="auth-modal__input input-reset consult-modal__messenger-input" type="text" name="consult-messenger-contact" placeholder="@ivan / номер телефона" autocomplete="off">
+            </div>
+          </div>
+        </div>
+        <label class="auth-modal__consent">
+          <input class="auth-modal__checkbox visually-hidden" type="checkbox" name="consult-consent" required>
+          <span class="auth-modal__checkbox-ui" aria-hidden="true"></span>
+          <span class="auth-modal__consent-text">Я&nbsp;согласен(а) с&nbsp;условиями <a class="auth-modal__consent-link" href="#">Политики</a> на&nbsp;обработку персональных данных</span>
+        </label>
+        <button class="auth-modal__submit btn-reset" type="submit">Отправить заявку</button>
+      </div>
+    </form>
+  </div>
+</div>
