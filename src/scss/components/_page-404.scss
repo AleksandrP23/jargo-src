@@ -2,12 +2,12 @@
 .main--404 {
   background: #fff;
 
-  > section {
+  > section:not(:last-child) {
     margin-bottom: 70px;
   }
 
   @include tablet {
-    > section {
+    > section:not(:last-child) {
       margin-bottom: 50px;
     }
   }

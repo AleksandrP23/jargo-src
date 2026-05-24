@@ -1,11 +1,11 @@
 
 .main--catalog {
-  > section {
+  > section:not(:last-child) {
     margin-bottom: 70px;
   }
 
   @include tablet {
-    > section {
+    > section:not(:last-child) {
       margin-bottom: 50px;
     }
   }
@@ -84,14 +84,14 @@
 
     &__thumb {
       border-radius: 0;
-      width: 34px;
-      height: 30px;
+      width: 30px;
+      height: 26px;
     }
 
     &__label {
       min-width: 0;
       font-weight: 400;
-      font-size: 16px;
+      font-size: 13px;
       line-height: 1.2;
     }
   }
@@ -1048,13 +1048,6 @@
     gap: 30px;
   }
 
-  &__lead {
-    margin: 0;
-    font-size: 18px;
-    line-height: 130%;
-    color: #585858;
-  }
-
   &__row {
     margin-top: 0;
   }
@@ -1062,6 +1055,9 @@
 
 .catalog-consult {
   &__shell {
+    --consult-decor-w: 200px;
+    --consult-content-gutter: 110px;
+
     position: relative;
     overflow: hidden;
     border: 1px solid #fff;
@@ -1078,7 +1074,7 @@
     font-size: 35px;
     line-height: 1.2;
     text-align: center;
-    text-transform: lowercase;
+    text-transform: uppercase;
     color: #fff;
   }
 
@@ -1223,27 +1219,42 @@
     }
   }
 
-  &__shell::before,
-  &__shell::after {
-    content: "";
+  &__decor {
     position: absolute;
     z-index: 0;
-    border-radius: 50%;
-    width: 337px;
-    height: 238px;
-    background-color: rgb(234 226 226 / 10%);
-    filter: blur(60px);
+    display: block;
+    width: auto;
+    max-width: none;
+    height: auto;
+    object-fit: contain;
     pointer-events: none;
-  }
+    user-select: none;
 
-  &__shell::before {
-    left: -247px;
-    top: -151px;
-  }
+    &--left {
+      left: -20px;
+      top: 0;
+      // width: var(--consult-decor-w);
+      max-width: 26%;
+      object-position: left top;
 
-  &__shell::after {
-    right: -252px;
-    top: -149px;
+      @include mobile {
+        max-width: 50%;
+        left: -50px;
+      }
+    }
+
+    &--right {
+      right: -20px;
+      top: 0;
+      // width: var(--consult-decor-w);
+      max-width: 26%;
+      object-position: right top;
+
+      @include mobile {
+        max-width: 50%;
+        right: -50px;
+      }
+    }
   }
 
   &__title,
@@ -1251,12 +1262,18 @@
   &__form {
     position: relative;
     z-index: 1;
+    box-sizing: border-box;
+    padding-inline: var(--consult-content-gutter);
   }
 
   @include tablet {
     &__shell {
+      --consult-decor-w: 150px;
+      --consult-content-gutter: 72px;
+
       padding: 30px 20px;
       min-height: auto;
+      border-radius: 13px;
     }
 
     &__title {
@@ -1288,7 +1305,11 @@
 
   @include mobile {
     &__shell {
-      padding: 30px 15px;
+      --consult-decor-w: 100px;
+      --consult-content-gutter: 10px;
+
+      padding: 40px 15px 30px;
+      border-radius: 10px;
     }
 
     &__title {

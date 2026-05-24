@@ -232,7 +232,7 @@
     margin: 0;
     width: 100%;
     max-width: 700px;
-    gap: 15px;
+    gap: 40px;
   }
 
   .hero__lead {
@@ -243,6 +243,7 @@
 
   .hero__breadcrumb {
     margin: 0;
+    margin-bottom: 10px;
     font-size: 13px;
     line-height: 0.98;
     color: #fff;
@@ -278,7 +279,6 @@
     font-weight: 500;
     font-size: 35px;
     line-height: 1.2;
-    text-transform: none;
     color: rgb(255 255 255 / 90%);
   }
 
@@ -463,7 +463,7 @@
       flex-direction: column;
       order: 1;
       width: 100%;
-      gap: 15px;
+      gap: 10px;
     }
 
     .hero__title {

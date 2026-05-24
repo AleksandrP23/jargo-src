@@ -1,4 +1,62 @@
 .bath-product-hero {
+  .hero__content {
+    justify-content: space-between;
+    gap: 60px;
+  }
+
+  @include for-desktop {
+    .hero__content {
+      min-height: 350px;
+    }
+  }
+
+  .hero__lead {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .hero__title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .hero__features {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 15px;
+    row-gap: 10px;
+    width: 100%;
+    padding-left: 15px;
+  }
+
+  .hero__features-item {
+    min-width: 0;
+    list-style: disc;
+    color: #fff;
+  }
+
+  .hero__features-link {
+    display: block;
+    font-size: 18px;
+    line-height: 1.2;
+    text-decoration: none;
+    color: #f6f6f6;
+    transition: color 0.15s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: #fff;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #ed7407;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
   .hero__breadcrumb-link {
     text-decoration: none;
     color: #d0d0d0;
@@ -132,6 +190,13 @@
   }
 
   @include desktop {
+    .hero__content {
+      gap: 50px;
+      flex: auto;
+      width: auto;
+      max-width: 100%;
+    }
+
     .product-rotate,
     .product-rotate__visual,
     .product-rotate__viewport {
@@ -139,19 +204,169 @@
     }
   }
 
+  // Figma 422:14020 — tablet: верхний ряд (текст + фото), features 15px inset, 2 колонки
   @include tablet {
-    .product-rotate__visual {
-      margin-right: auto;
-      margin-left: 0;
-      max-width: 420px;
+    @media (min-width: 561px) {
+      .hero__inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: start;
+        padding: 40px 0 30px;
+        row-gap: 20px;
+      }
+
+      .hero__content {
+        display: contents;
+        min-height: 0;
+        gap: 0;
+      }
+
+      .hero__lead {
+        position: relative;
+        z-index: 2;
+        grid-column: 1;
+        grid-row: 1;
+        padding-left: 5px; 
+        width: 100%;
+        max-width: 395px;
+        gap: 40px;
+      }
+
+      .hero__title-group {
+        max-width: 423px;
+      }
+
+      .hero__media--chimneys {
+        position: relative;
+        z-index: 1;
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: end;
+        top: auto;
+        left: auto;
+        right: -80px;
+        margin-top: -41px;
+        width: min(515px, 67.057%);
+        max-width: 515px;
+      }
+
+      .hero__features {
+        grid-column: 1;
+        grid-row: 2;
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        padding: 0;
+        padding-left: 15px;
+      }
+
+      .hero__features-link {
+        font-size: 16px;
+      }
+
+      .product-rotate {
+        width: 100%;
+      }
+
+      .product-rotate,
+      .product-rotate__visual,
+      .product-rotate__viewport {
+        max-width: none;
+      }
+
+      .product-rotate__visual {
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+      }
     }
   }
 
+  // Figma 339:27889 — mobile 360: крошки+заголовок → фото 270 → подзаголовок → features
   @include mobile {
+    .hero__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 30px 15px 40px;
+      gap: 15px;
+    }
+
+    .hero__content {
+      display: contents;
+    }
+
+    .hero__lead {
+      display: contents;
+    }
+
+    .hero__title-group {
+      display: contents;
+    }
+
+    .hero__breadcrumb {
+      order: 1;
+      width: 100%;
+    }
+
+    .hero__title {
+      order: 2;
+      width: 100%;
+    }
+
+    .hero__media--chimneys {
+      position: relative;
+      top: auto;
+      left: auto;
+      right: auto;
+      order: 3;
+      margin-top: 0;
+      margin-right: auto;
+      margin-left: auto;
+      width: 100%;
+      max-width: 270px;
+    }
+
+    .hero__subtitle {
+      order: 4;
+      margin-top: 0;
+      width: 100%;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .hero__features {
+      order: 5;
+      grid-template-columns: 1fr;
+      row-gap: 10px;
+      margin-top: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    .hero__features-link {
+      font-size: 14px;
+    }
+
+    .product-rotate,
+    .product-rotate__visual {
+      max-width: 270px;
+    }
+
     .product-rotate__visual {
       margin-right: auto;
       margin-left: auto;
-      max-width: 280px;
+    }
+
+    .product-rotate__viewport {
+      aspect-ratio: 335 / 178;
+    }
+
+    .product-rotate__hint img {
+      width: 30px;
+      height: 30px;
     }
   }
 }
@@ -247,6 +462,8 @@
   text-decoration: underline;
   color: #363636;
   text-underline-offset: 3px;
+  text-transform: uppercase;
+  text-decoration-color: #ed7407;
 
   &:hover,
   &:focus-visible {
@@ -275,6 +492,7 @@
   line-height: 1.3;
   text-align: center;
   color: #363636;
+  text-transform: uppercase;
 
   @include tablet {
     font-size: 25px;
@@ -373,6 +591,7 @@
   font-size: 28px;
   line-height: 1.3;
   color: #363636;
+  text-transform: uppercase;
 
   @include tablet {
     font-size: 25px;
@@ -430,6 +649,16 @@
       height: auto;
       max-height: 400px;
       aspect-ratio: 546 / 350;
+    }
+  }
+}
+
+.bath-product-video.series-video {
+  @include mobile {
+    .article-body__video.academy-video--series-full .academy-video__preview {
+      height: auto;
+      max-height: none;
+      aspect-ratio: 320 / 250;
     }
   }
 }

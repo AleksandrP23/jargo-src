@@ -1,11 +1,6 @@
 
 .main--checkout {
-  padding-bottom: 70px;
   background: #fff;
-
-  @include tablet {
-    padding-bottom: 50px;
-  }
 }
 
 .top-shell--article {
@@ -21,32 +16,12 @@
     margin-bottom: 12px;
   }
 
-  &__heading {
-    margin: 0;
-    font-weight: 500;
-    font-size: 35px;
-    line-height: 1.2;
-    color: #363636;
-  }
-
-  @include desktop {
-    &__heading {
-      font-size: 30px;
-    }
+  &__head.section-head {
+    margin-bottom: 0;
   }
 
   @include tablet {
     margin-bottom: 24px;
-
-    &__heading {
-      font-size: 28px;
-    }
-  }
-
-  @include mobile {
-    &__heading {
-      font-size: 22px;
-    }
   }
 }
 
@@ -218,16 +193,6 @@
   box-sizing: border-box;
   gap: 0 30px;
 
-  &--issues {
-    > .checkout-line__product,
-    > .checkout-line__ppu,
-    > .checkout-line__qty,
-    > .checkout-line__sum,
-    > .checkout-line__badge {
-      opacity: 0.6;
-    }
-  }
-
   &--placeholder {
     align-items: center;
     grid-template-columns: minmax(0, 1fr) 36px;
@@ -235,6 +200,14 @@
     min-height: 48px;
     background: #fafafa;
     gap: 0 30px;
+
+    > .checkout-line__product,
+    > .checkout-line__ppu,
+    > .checkout-line__qty,
+    > .checkout-line__sum,
+    > .checkout-line__badge {
+      opacity: 0.6;
+    }
 
     .checkout-line__ppu,
     .checkout-line__qty,
@@ -273,11 +246,6 @@
       width: 88px;
       height: 70px;
       object-fit: contain;
-    }
-
-    &--placeholder img {
-      width: 48px;
-      height: 40px;
     }
   }
 
@@ -461,7 +429,7 @@
     min-height: 38px;
     gap: 0 15px;
 
-    &:not(&--placeholder) .checkout-line__media img {
+    .checkout-line__media img {
       width: 38px;
       height: 30px;
     }
@@ -532,7 +500,7 @@
     min-height: 0;
     gap: 10px 15px;
 
-    &:not(&--placeholder) .checkout-line__media img {
+    .checkout-line__media img {
       width: 38px;
       height: 30px;
     }
@@ -620,11 +588,6 @@
         gap: 10px;
       }
 
-      .checkout-line__media--placeholder img {
-        width: 36px;
-        height: 30px;
-      }
-
       .checkout-line__name--placeholder {
         font-size: 13px;
       }
@@ -674,7 +637,7 @@
 
   @include mobile {
     flex-direction: column;
-    align-items: stretch;
+    align-items: flex-end;
     gap: 20px;
   }
 }

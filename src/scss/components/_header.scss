@@ -78,7 +78,7 @@
     align-items: center;
     text-align: center;
 
-    span {
+    > span {
       font-size: 12px;
       line-height: 1.2;
       color: rgb(255 255 255 / 60%);
@@ -93,6 +93,11 @@
     &:hover,
     &:focus-visible {
       color: #ed7407;
+    }
+
+    &-text {
+      font-size: 18px;
+      line-height: 1.2;
     }
 
     &-icon {
@@ -209,11 +214,11 @@
         color: #ed7407;
 
         .icon--search {
-          stroke: #ed7407;
+          stroke: #fff;
         }
 
         .icon--login {
-          fill: #ed7407;
+          fill: #fff;
         }
       }
 
@@ -227,6 +232,7 @@
     span {
       font-size: 13px;
       line-height: 1.2;
+      opacity: 0.6;
     }
 
     .icon {
@@ -235,14 +241,14 @@
 
     .icon--search {
       fill: none;
-      stroke: #fff;
+      stroke: #ed7407;
       stroke-linecap: round;
       stroke-width: 1.25px;
       transition: stroke 0.15s ease;
     }
 
     .icon--login {
-      fill: #fff;
+      fill: #ed7407;
       transition: fill 0.15s ease;
     }
   }
@@ -451,14 +457,6 @@
 
       button {
         gap: 0;
-      }
-
-      .icon--search {
-        stroke: #ed7407;
-      }
-
-      .icon--login {
-        fill: #ed7407;
       }
     }
 

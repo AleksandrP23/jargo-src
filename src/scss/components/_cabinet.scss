@@ -4,12 +4,7 @@
 }
 
 .main--cabinet {
-  padding-bottom: 70px;
   background: #fff;
-
-  @include tablet {
-    padding-bottom: 50px;
-  }
 }
 
 .cabinet-strip {

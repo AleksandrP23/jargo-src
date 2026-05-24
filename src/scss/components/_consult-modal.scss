@@ -1,0 +1,118 @@
+.graph-modal__container--consult {
+  position: relative;
+  border-radius: 20px;
+  padding: 30px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.graph-modal__content--consult {
+  overflow: visible;
+  padding: 0;
+}
+
+.graph-modal__close--consult {
+  right: 0;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  background-image: none;
+
+  svg {
+    display: block;
+    width: 36px;
+    height: 36px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #ed7407;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+.consult-modal {
+  &__lead {
+    margin: 0;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.3;
+    text-align: center;
+    color: #363636;
+  }
+
+  &__messenger-row {
+    display: flex;
+    align-items: stretch;
+    gap: 5px;
+  }
+
+  &__messengers {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__messenger-btn {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7.5px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    background: #585858;
+    transition: background-color 0.15s ease;
+
+    &:focus-visible {
+      outline: 2px solid #ed7407;
+      outline-offset: 2px;
+    }
+
+    &:hover {
+      background: #ed7407;
+
+      .consult-modal__messenger-icon {
+        fill: #fff;
+      }
+    }
+
+    &--active {
+      background: #585858;
+
+      .consult-modal__messenger-icon {
+        fill: #fff;
+      }
+
+      &:hover {
+        background: #ed7407;
+      }
+    }
+  }
+
+  &__messenger-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+    transition: fill 0.15s ease;
+  }
+
+  &__messenger-input {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  @include mobile {
+    &__messenger-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    &__messengers {
+      justify-content: flex-start;
+    }
+  }
+}
