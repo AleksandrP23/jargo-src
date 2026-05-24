@@ -18,11 +18,15 @@ import './components/materials-videos.js';
 import initCheckoutSteppers from './components/checkout-stepper.js';
 import initCabinetPasswordToggle from './components/cabinet-password-toggle.js';
 import initCabinetOrderCards from './components/cabinet-order-cards.js';
+import initBathSeriesCard from './components/bath-series-card.js';
+import initConsultModal from './components/consult-modal.js';
 
 initCatalogToolbar();
 initCheckoutSteppers();
 initCabinetPasswordToggle();
 initCabinetOrderCards();
+initBathSeriesCard();
+initConsultModal();
 
 window.graphModal = new GraphModal({
   isClose(modal) {
