@@ -1,5 +1,4 @@
 import Swiper from 'swiper';
-import { Navigation } from 'swiper/modules';
 
 const GALLERY_BREAKPOINTS = {
   0: {
@@ -13,9 +12,30 @@ const GALLERY_BREAKPOINTS = {
   },
 };
 
-const bindGalleryDots = (swiper, paginationEl) => {
-  const slideCount = swiper.slides.length;
+const getActiveSlideIndex = (swiper) => swiper.activeIndex ?? 0;
 
+const goToSlide = (swiper, index, slideCount) => {
+  const targetIndex = ((index % slideCount) + slideCount) % slideCount;
+  swiper.slideTo(targetIndex);
+};
+
+const bindCyclicNavigation = (swiper, prevEl, nextEl, slideCount) => {
+  if (slideCount < 2) {
+    return;
+  }
+
+  nextEl?.addEventListener('click', (event) => {
+    event.preventDefault();
+    goToSlide(swiper, getActiveSlideIndex(swiper) + 1, slideCount);
+  });
+
+  prevEl?.addEventListener('click', (event) => {
+    event.preventDefault();
+    goToSlide(swiper, getActiveSlideIndex(swiper) - 1, slideCount);
+  });
+};
+
+const bindGalleryDots = (swiper, paginationEl, slideCount) => {
   paginationEl.replaceChildren();
 
   for (let i = 0; i < slideCount; i += 1) {
@@ -26,13 +46,13 @@ const bindGalleryDots = (swiper, paginationEl) => {
     dot.setAttribute('role', 'tab');
     dot.setAttribute('aria-label', `Слайд ${i + 1}`);
     dot.addEventListener('click', () => {
-      swiper.slideTo(i);
+      goToSlide(swiper, i, slideCount);
     });
     paginationEl.appendChild(dot);
   }
 
   const updateDots = () => {
-    const activeIndex = swiper.activeIndex ?? 0;
+    const activeIndex = getActiveSlideIndex(swiper);
 
     paginationEl.querySelectorAll('.article-body__gallery-dot').forEach((dot, index) => {
       const isActive = index === activeIndex;
@@ -62,32 +82,27 @@ const initArticleGallery = () => {
     const paginationEl = root.querySelector('[data-article-gallery-pagination]');
     const currentEl = root.querySelector('[data-gallery-current]');
     const totalEl = root.querySelector('[data-gallery-total]');
+    const slideCount = galleryEl.querySelectorAll('.swiper-slide').length;
 
     const swiper = new Swiper(galleryEl, {
-      modules: [Navigation],
       slidesPerView: 4,
       spaceBetween: 10,
       breakpoints: GALLERY_BREAKPOINTS,
-      ...(!useDots
-        ? {
-            navigation: {
-              prevEl: prevEl ?? undefined,
-              nextEl: nextEl ?? undefined,
-            },
-          }
-        : {}),
     });
 
+    if (!useDots) {
+      bindCyclicNavigation(swiper, prevEl, nextEl, slideCount);
+    }
+
     if (useDots && paginationEl) {
-      bindGalleryDots(swiper, paginationEl);
+      bindGalleryDots(swiper, paginationEl, slideCount);
     }
 
     if (!useDots && currentEl && totalEl) {
       const updateCounter = () => {
-        const current = (swiper.realIndex ?? 0) + 1;
-        const total = swiper.slides.length;
+        const current = getActiveSlideIndex(swiper) + 1;
         currentEl.textContent = String(current).padStart(2, '0');
-        totalEl.textContent = String(total).padStart(2, '0');
+        totalEl.textContent = String(slideCount).padStart(2, '0');
       };
 
       swiper.on('init', updateCounter);

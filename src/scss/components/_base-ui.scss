@@ -76,7 +76,9 @@
     text-align: center;
     text-transform: uppercase;
     color: #363636;
-    overflow-wrap: anywhere;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
   }
 
   &__title--accent {
@@ -130,6 +132,12 @@
       font-weight: 500;
       font-size: 20px;
       line-height: 1.2;
+    }
+  }
+
+  @media (max-width: 359px) and (min-width: 320px) {
+    &__title {
+      font-size: 17px;
     }
   }
 }

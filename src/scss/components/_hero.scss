@@ -209,6 +209,20 @@
       border-radius: 0;
     }
   }
+
+  @media (max-width: 359px) and (min-width: 320px) {
+    &__title {
+      font-size: 19px;
+    }
+
+    &__content {
+      max-width: 200px;
+    }
+
+    &__media {
+      right: -70px;
+    }
+  }
 }
 
 .hero--chimneys {
