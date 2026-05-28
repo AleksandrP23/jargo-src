@@ -406,7 +406,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 30px;
+    gap: 15px;
   }
 }
 
@@ -445,6 +445,13 @@
     outline: 2px solid #ed7407;
     outline-offset: 2px;
   }
+
+  @include mobile {
+    width: 26px;
+    height: 26px;
+    font-size: 18px;
+  }
+  
 }
 
 .bath-product-hero-toolbar__value {
