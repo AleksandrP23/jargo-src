@@ -1,14 +1,73 @@
-const validateFormStep = (stepEl) => {
-  const fields = stepEl.querySelectorAll('input, select, textarea');
+import { QUIZ_STOVES } from '../data/quiz-stoves.js';
+import { calculateVolume, matchStoves } from './quiz-calc.js';
+import { printQuizResult } from './quiz-print.js';
 
-  for (const field of fields) {
-    if (!field.checkValidity()) {
-      field.reportValidity();
-      return false;
-    }
+const parseDecimal = (value) => {
+  const normalized = String(value).trim().replace(',', '.');
+
+  if (!normalized) {
+    return null;
   }
 
-  return true;
+  const num = Number.parseFloat(normalized);
+
+  return Number.isFinite(num) && num >= 0 ? num : null;
+};
+
+const getCheckedValue = (quiz, name) => {
+  return quiz.querySelector(`input[name="${name}"]:checked`)?.value ?? null;
+};
+
+const isDimensionsStepValid = (quiz) => {
+  const length = parseDecimal(quiz.querySelector('[name="quiz-length"]')?.value);
+  const width = parseDecimal(quiz.querySelector('[name="quiz-width"]')?.value);
+  const height = parseDecimal(quiz.querySelector('[name="quiz-height"]')?.value);
+
+  return length !== null && width !== null && height !== null && length > 0 && width > 0 && height > 0;
+};
+
+const collectAnswers = (quiz) => {
+  const length = parseDecimal(quiz.querySelector('[name="quiz-length"]')?.value);
+  const width = parseDecimal(quiz.querySelector('[name="quiz-width"]')?.value);
+  const height = parseDecimal(quiz.querySelector('[name="quiz-height"]')?.value);
+  const areaRaw = quiz.querySelector('[name="quiz-area"]')?.value ?? '';
+  const uninsulatedArea = parseDecimal(areaRaw) ?? 0;
+
+  return {
+    length,
+    width,
+    height,
+    uninsulatedArea,
+    wallMaterial: getCheckedValue(quiz, 'quiz-wall'),
+    saunaType: getCheckedValue(quiz, 'quiz-sauna-type'),
+    firebox: getCheckedValue(quiz, 'quiz-firebox'),
+    door: getCheckedValue(quiz, 'quiz-door'),
+    material: getCheckedValue(quiz, 'quiz-material'),
+  };
+};
+
+const renderResultCards = (listEl, models) => {
+  listEl.innerHTML = models.map((model, index) => {
+    const badge = index === 0
+      ? '<span class="quiz-result-card__badge">Рекомендуем</span>'
+      : '';
+
+    return `
+      <li>
+        <article class="quiz-result-card">
+          <a class="quiz-result-card__link" href="${model.url}">
+            ${badge}
+            <picture class="quiz-result-card__pic">
+              <source srcset="${model.imageWebp}" type="image/webp">
+              <img src="${model.image}" width="120" height="100" alt="">
+            </picture>
+            <span class="quiz-result-card__title">Печь для бани «${model.title}»</span>
+            <span class="quiz-result-card__more">Подробнее&nbsp;&rarr;</span>
+          </a>
+        </article>
+      </li>
+    `;
+  }).join('');
 };
 
 const initQuiz = () => {
@@ -24,18 +83,43 @@ const initQuiz = () => {
   const formSteps = Array.from(quiz.querySelectorAll('[data-quiz-form-step]'));
   const resultSuccessEl = quiz.querySelector('[data-quiz-result-panel="success"]');
   const resultEmptyEl = quiz.querySelector('[data-quiz-result-panel="empty"]');
+  const resultListEl = quiz.querySelector('[data-quiz-result-list]');
+  const resultVolumeEl = quiz.querySelector('[data-quiz-result-volume]');
   const startBtn = quiz.querySelector('[data-quiz-start]');
   const prevBtn = quiz.querySelector('[data-quiz-prev]');
   const nextBtn = quiz.querySelector('[data-quiz-next]');
   const againBtn = quiz.querySelector('[data-quiz-again]');
+  const printBtn = quiz.querySelector('[data-quiz-print]');
+  const actionsEl = quiz.querySelector('[data-quiz-actions]');
   const openers = document.querySelectorAll('[data-quiz-open]');
+  const fireboxInputs = quiz.querySelectorAll('input[name="quiz-firebox"]');
+  const doorGlassLabel = quiz.querySelector('[data-quiz-door-glass]');
+  const doorGlassInput = quiz.querySelector('input[name="quiz-door"][value="glass"]');
+  const doorPlainInput = quiz.querySelector('input[name="quiz-door"][value="plain"]');
+  const dimensionInputs = quiz.querySelectorAll('[name="quiz-length"], [name="quiz-width"], [name="quiz-height"]');
 
   let showingIntro = true;
   /** @type {number} 0..2 — шаги анкеты, 3 — экран результата */
   let stepIndex = 0;
   let showingResult = false;
+  let lastResult = null;
 
-  const demoHasResults = () => quiz.getAttribute('data-quiz-demo-results') !== 'false';
+  const isKtkSelected = () => getCheckedValue(quiz, 'quiz-firebox') === 'ktk';
+
+  const applyKtkDoorRule = () => {
+    if (!doorGlassLabel || !doorGlassInput || !doorPlainInput) {
+      return;
+    }
+
+    const ktk = isKtkSelected();
+
+    doorGlassLabel.classList.toggle('quiz-radio-card--disabled', ktk);
+    doorGlassInput.disabled = ktk;
+
+    if (ktk) {
+      doorPlainInput.checked = true;
+    }
+  };
 
   const setPhase = (phase) => {
     if (stepperEl) {
@@ -90,6 +174,27 @@ const initQuiz = () => {
     }
 
     setPhase(stepIndex);
+    applyKtkDoorRule();
+  };
+
+  const runCalculation = () => {
+    const answers = collectAnswers(quiz);
+    const volume = calculateVolume({
+      length: answers.length,
+      width: answers.width,
+      height: answers.height,
+      uninsulatedArea: answers.uninsulatedArea,
+      wallMaterial: answers.wallMaterial,
+    });
+
+    const models = matchStoves(volume, {
+      saunaType: answers.saunaType,
+      firebox: answers.firebox,
+      door: answers.door,
+      material: answers.material,
+    }, QUIZ_STOVES);
+
+    return { volume, models };
   };
 
   const renderResultView = () => {
@@ -98,7 +203,19 @@ const initQuiz = () => {
       el.classList.remove('quiz__step--active');
     });
 
-    const hasResults = demoHasResults();
+    const answers = collectAnswers(quiz);
+    const { volume, models } = runCalculation();
+    const hasResults = models.length > 0;
+
+    lastResult = hasResults ? { answers, volume, models } : null;
+
+    if (resultVolumeEl) {
+      resultVolumeEl.textContent = `${volume} м³`;
+    }
+
+    if (resultListEl && hasResults) {
+      renderResultCards(resultListEl, models);
+    }
 
     if (resultSuccessEl) {
       resultSuccessEl.hidden = !hasResults;
@@ -123,11 +240,25 @@ const initQuiz = () => {
     }
 
     if (showingResult) {
+      const hasSuccessResult = Boolean(lastResult);
+
       prevBtn.disabled = false;
       prevBtn.textContent = '← Назад';
       nextBtn.hidden = true;
       againBtn.hidden = false;
+
+      if (printBtn) {
+        printBtn.hidden = !hasSuccessResult;
+      }
+
+      actionsEl?.classList.toggle('quiz__actions--result-success', hasSuccessResult);
       return;
+    }
+
+    actionsEl?.classList.remove('quiz__actions--result-success');
+
+    if (printBtn) {
+      printBtn.hidden = true;
     }
 
     nextBtn.hidden = false;
@@ -137,11 +268,19 @@ const initQuiz = () => {
       prevBtn.disabled = true;
       nextBtn.textContent = 'Далее →';
       nextBtn.classList.remove('quiz__nav--accent');
+      nextBtn.disabled = !isDimensionsStepValid(quiz);
+    } else if (stepIndex === 1) {
+      prevBtn.disabled = false;
+      prevBtn.textContent = '← Назад';
+      nextBtn.textContent = 'Далее →';
+      nextBtn.classList.remove('quiz__nav--accent');
+      nextBtn.disabled = false;
     } else {
       prevBtn.disabled = false;
       prevBtn.textContent = '← Назад';
-      nextBtn.textContent = 'Смотреть результат →';
+      nextBtn.textContent = 'Подобрать →';
       nextBtn.classList.add('quiz__nav--accent');
+      nextBtn.disabled = false;
     }
   };
 
@@ -163,12 +302,16 @@ const initQuiz = () => {
     renderActions();
   };
 
-  const goNext = () => {
-    if (showingIntro) {
-      return;
+  const validateFormStep = (stepEl) => {
+    if (stepIndex === 0) {
+      return isDimensionsStepValid(quiz);
     }
 
-    if (showingResult) {
+    return true;
+  };
+
+  const goNext = () => {
+    if (showingIntro || showingResult) {
       return;
     }
 
@@ -204,18 +347,35 @@ const initQuiz = () => {
     }
   };
 
-  const restartFromScratch = () => {
-    quiz.querySelectorAll('input').forEach((input) => {
-      if (input.type === 'radio' || input.type === 'checkbox') {
-        input.checked = false;
-      } else {
-        input.value = '';
-      }
-    });
+  const resetDefaults = () => {
+    quiz.querySelector('[name="quiz-length"]').value = '';
+    quiz.querySelector('[name="quiz-width"]').value = '';
+    quiz.querySelector('[name="quiz-height"]').value = '';
+    quiz.querySelector('[name="quiz-area"]').value = '';
 
+    quiz.querySelector('input[name="quiz-wall"][value="vagon"]').checked = true;
+    quiz.querySelector('input[name="quiz-sauna-type"][value="russian"]').checked = true;
+    quiz.querySelector('input[name="quiz-firebox"][value="ktk"]').checked = true;
+    quiz.querySelector('input[name="quiz-door"][value="plain"]').checked = true;
+    quiz.querySelector('input[name="quiz-material"][value="stal"]').checked = true;
+
+    applyKtkDoorRule();
+  };
+
+  const restartFromScratch = () => {
+    resetDefaults();
     showingResult = false;
+    lastResult = null;
     showIntroView();
     renderActions();
+  };
+
+  const printResult = () => {
+    if (!lastResult) {
+      return;
+    }
+
+    printQuizResult(lastResult);
   };
 
   startBtn?.addEventListener('click', () => {
@@ -228,6 +388,7 @@ const initQuiz = () => {
   nextBtn?.addEventListener('click', goNext);
   prevBtn?.addEventListener('click', goPrev);
   againBtn?.addEventListener('click', restartFromScratch);
+  printBtn?.addEventListener('click', printResult);
 
   openers.forEach((opener) => {
     opener.addEventListener('click', () => {
@@ -235,6 +396,21 @@ const initQuiz = () => {
     });
   });
 
+  fireboxInputs.forEach((input) => {
+    input.addEventListener('change', () => {
+      applyKtkDoorRule();
+    });
+  });
+
+  dimensionInputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      if (!showingIntro && !showingResult && stepIndex === 0) {
+        renderActions();
+      }
+    });
+  });
+
+  applyKtkDoorRule();
   render();
 };
 

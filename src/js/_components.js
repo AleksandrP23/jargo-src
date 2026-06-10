@@ -20,6 +20,7 @@ import initCabinetPasswordToggle from './components/cabinet-password-toggle.js';
 import initCabinetOrderCards from './components/cabinet-order-cards.js';
 import initBathSeriesCard from './components/bath-series-card.js';
 import initConsultModal from './components/consult-modal.js';
+import initAuthModal from './components/auth-modal.js';
 
 initCatalogToolbar();
 initCheckoutSteppers();
@@ -27,6 +28,7 @@ initCabinetPasswordToggle();
 initCabinetOrderCards();
 initBathSeriesCard();
 initConsultModal();
+initAuthModal();
 
 window.graphModal = new GraphModal({
   isClose(modal) {

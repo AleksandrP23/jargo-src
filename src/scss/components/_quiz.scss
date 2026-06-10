@@ -311,6 +311,12 @@ $c-quiz-hint-bg: #f4f4f4;
 .quiz-radio-card {
   cursor: pointer;
 
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
   &__box {
     display: flex;
     align-items: center;
@@ -593,6 +599,25 @@ $c-quiz-hint-bg: #f4f4f4;
   justify-content: space-between;
   margin-top: 24px;
   gap: 16px;
+
+  &--result-success {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+
+    .quiz__nav--prev {
+      justify-self: start;
+    }
+
+    .quiz__nav--print {
+      justify-self: center;
+    }
+
+    .quiz__nav--again {
+      justify-self: end;
+      margin-left: 0;
+    }
+  }
 }
 
 .quiz__nav {
@@ -612,6 +637,10 @@ $c-quiz-hint-bg: #f4f4f4;
     color: $c-quiz-orange;
   }
 
+  &--print {
+    color: $c-quiz-text;
+  }
+
   &--next,
   &--again {
     margin-left: auto;
@@ -622,11 +651,28 @@ $c-quiz-hint-bg: #f4f4f4;
   }
 }
 
+.quiz-result-volume {
+  margin: 12px 0 0;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  color: $c-quiz-text;
+
+  strong {
+    font-weight: 500;
+    color: $c-quiz-orange;
+  }
+}
+
 .quiz-result-success {
   &__list {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
+
+    @include tablet {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
     @include mobile {
       grid-template-columns: 1fr;
@@ -635,7 +681,19 @@ $c-quiz-hint-bg: #f4f4f4;
 }
 
 .quiz-result-card {
+  &__badge {
+    display: inline-block;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.2;
+    color: #fff;
+    background-color: $c-quiz-orange;
+  }
+
   &__link {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
