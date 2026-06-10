@@ -1,7 +1,7 @@
 <div class="graph-modal__container graph-modal__container--quiz" role="dialog" aria-modal="true" data-graph-target="quiz">
   <button class="btn-reset js-modal-close graph-modal__close" aria-label="Закрыть модалку"></button>
   <div class="graph-modal__content graph-modal__content--quiz">
-    <div class="quiz" data-quiz data-quiz-demo-results="true">
+    <div class="quiz" data-quiz>
       <section class="quiz-intro" data-quiz-intro aria-label="Начало подбора печи">
         <div class="quiz-intro__glow quiz-intro__glow--1" aria-hidden="true"></div>
         <div class="quiz-intro__glow quiz-intro__glow--2" aria-hidden="true"></div>
@@ -88,7 +88,7 @@
                 <div class="quiz-fields__group quiz-fields__group--narrow">
                   <p class="quiz-fields__legend">Площадь неутепленных поверхностей, м<sup>2</sup>*</p>
                   <label class="quiz-field">
-                    <input class="input-reset quiz-field__input" type="text" name="quiz-area" inputmode="decimal" placeholder="0.0" autocomplete="off" required>
+                    <input class="input-reset quiz-field__input" type="text" name="quiz-area" inputmode="decimal" placeholder="0.0" autocomplete="off">
                   </label>
                 </div>
                 <div class="quiz-hint-block">
@@ -110,7 +110,7 @@
                 <p class="quiz-fields__legend">Материал стен</p>
                 <div class="quiz-fields__row quiz-fields__row--2">
                   <label class="quiz-radio-card">
-                    <input class="visually-hidden quiz-radio-card__input" type="radio" name="quiz-wall" value="vagon" required>
+                    <input class="visually-hidden quiz-radio-card__input" type="radio" name="quiz-wall" value="vagon" checked>
                     <span class="quiz-radio-card__box">
                       <span class="quiz-radio-card__control" aria-hidden="true"></span>
                       <span class="quiz-radio-card__text">Вагонка/утепленные</span>
@@ -129,7 +129,7 @@
                 <p class="quiz-fields__legend">Тип парной</p>
                 <div class="quiz-fields__row quiz-fields__row--2 quiz-fields__row--tall">
                   <label class="quiz-radio-card quiz-radio-card--tall">
-                    <input class="visually-hidden quiz-radio-card__input" type="radio" name="quiz-sauna-type" value="russian" required>
+                    <input class="visually-hidden quiz-radio-card__input" type="radio" name="quiz-sauna-type" value="russian" checked>
                     <span class="quiz-radio-card__box">
                       <span class="quiz-radio-card__control" aria-hidden="true"></span>
                       <span class="quiz-radio-card__text-wrap">
@@ -154,7 +154,7 @@
                 <p class="quiz-fields__legend">Расположение топки</p>
                 <div class="quiz-fields__row quiz-fields__row--2 quiz-fields__row--tall">
                   <label class="quiz-radio-card quiz-radio-card--tall">
-                    <input class="visually-hidden quiz-radio-card__input" type="radio" name="quiz-firebox" value="ktk" required>
+                    <input class="visually-hidden quiz-radio-card__input" type="radio" name="quiz-firebox" value="ktk" checked>
                     <span class="quiz-radio-card__box">
                       <span class="quiz-radio-card__control" aria-hidden="true"></span>
                       <span class="quiz-radio-card__text-wrap">
@@ -187,17 +187,17 @@
                 <p class="quiz-fields__legend">Материал печи</p>
                 <div class="quiz-fields__row quiz-fields__row--2">
                   <label class="quiz-radio-card">
-                    <input class="visually-hidden quiz-radio-card__input" type="radio" name="quiz-material" value="chugun" required>
+                    <input class="visually-hidden quiz-radio-card__input" type="radio" name="quiz-material" value="chugun">
                     <span class="quiz-radio-card__box">
                       <span class="quiz-radio-card__control" aria-hidden="true"></span>
                       <span class="quiz-radio-card__text">Чугун</span>
                     </span>
                   </label>
                   <label class="quiz-radio-card">
-                    <input class="visually-hidden quiz-radio-card__input" type="radio" name="quiz-material" value="stal">
+                    <input class="visually-hidden quiz-radio-card__input" type="radio" name="quiz-material" value="stal" checked>
                     <span class="quiz-radio-card__box">
                       <span class="quiz-radio-card__control" aria-hidden="true"></span>
-                      <span class="quiz-radio-card__text">Сталь</span>
+                      <span class="quiz-radio-card__text">Конструкционная сталь</span>
                     </span>
                   </label>
                 </div>
@@ -205,15 +205,15 @@
               <div class="quiz-fields__group">
                 <p class="quiz-fields__legend">Дверца</p>
                 <div class="quiz-fields__row quiz-fields__row--2">
-                  <label class="quiz-radio-card">
-                    <input class="visually-hidden quiz-radio-card__input" type="radio" name="quiz-door" value="glass" required>
+                  <label class="quiz-radio-card" data-quiz-door-glass>
+                    <input class="visually-hidden quiz-radio-card__input" type="radio" name="quiz-door" value="glass">
                     <span class="quiz-radio-card__box">
                       <span class="quiz-radio-card__control" aria-hidden="true"></span>
                       <span class="quiz-radio-card__text">Со стеклом</span>
                     </span>
                   </label>
                   <label class="quiz-radio-card">
-                    <input class="visually-hidden quiz-radio-card__input" type="radio" name="quiz-door" value="plain">
+                    <input class="visually-hidden quiz-radio-card__input" type="radio" name="quiz-door" value="plain" checked>
                     <span class="quiz-radio-card__box">
                       <span class="quiz-radio-card__control" aria-hidden="true"></span>
                       <span class="quiz-radio-card__text">Без стекла</span>
@@ -229,33 +229,9 @@
               <div class="quiz__step-head">
                 <h3 class="quiz__step-title">Подобранные модели</h3>
                 <p class="quiz__step-desc">По&nbsp;вашим параметрам мы&nbsp;нашли подходящие печи ЖарGO.</p>
+                <p class="quiz-result-volume">Расчётный объём парной: <strong data-quiz-result-volume>—</strong></p>
               </div>
-              <ul class="quiz-result-success__list list-reset">
-                <li>
-                  <article class="quiz-result-card">
-                    <a class="quiz-result-card__link" href="#">
-                      <picture class="quiz-result-card__pic">
-                        <source srcset="img/home/product-bath-stove.webp" type="image/webp">
-                        <img src="img/home/product-bath-stove.png" width="120" height="100" alt="">
-                      </picture>
-                      <span class="quiz-result-card__title">Печь для бани «ЖарGO&nbsp;Классик»</span>
-                      <span class="quiz-result-card__more">Подробнее&nbsp;&rarr;</span>
-                    </a>
-                  </article>
-                </li>
-                <li>
-                  <article class="quiz-result-card">
-                    <a class="quiz-result-card__link" href="#">
-                      <picture class="quiz-result-card__pic">
-                        <source srcset="img/home/product-bath-stove.webp" type="image/webp">
-                        <img src="img/home/product-bath-stove.png" width="120" height="100" alt="">
-                      </picture>
-                      <span class="quiz-result-card__title">Печь для бани «ЖарGO&nbsp;Компакт»</span>
-                      <span class="quiz-result-card__more">Подробнее&nbsp;&rarr;</span>
-                    </a>
-                  </article>
-                </li>
-              </ul>
+              <ul class="quiz-result-success__list list-reset" data-quiz-result-list></ul>
             </div>
           </div>
 
@@ -293,6 +269,7 @@
 
         <div class="quiz__actions" data-quiz-actions>
           <button class="btn-reset quiz__nav quiz__nav--prev" type="button" data-quiz-prev disabled>&larr; Назад</button>
+          <button class="btn-reset quiz__nav quiz__nav--print" type="button" data-quiz-print hidden>Распечатать в PDF</button>
           <button class="btn-reset quiz__nav quiz__nav--next" type="button" data-quiz-next>Далее&nbsp;&rarr;</button>
           <button class="btn-reset quiz__nav quiz__nav--again" type="button" data-quiz-again hidden>Рассчитать еще раз</button>
         </div>

@@ -46,9 +46,11 @@
         <button class="auth-modal__submit btn-reset" type="submit">Зарегистрироваться</button>
         <div class="auth-modal__footer">
           <span class="auth-modal__footer-note">У&nbsp;меня уже есть аккаунт</span>
-          <button class="auth-modal__footer-link btn-reset" type="button">Забыли пароль?</button>
+          <button class="auth-modal__footer-link btn-reset" type="button" data-graph-path="password-reset">Забыли пароль?</button>
         </div>
       </div>
     </form>
   </div>
 </div>
+@include('password-reset-modal.html')
+@include('password-reset-success-modal.html')
