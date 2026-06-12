@@ -5,12 +5,24 @@
       <section class="quiz-intro" data-quiz-intro aria-label="Начало подбора печи">
         <div class="quiz-intro__glow quiz-intro__glow--1" aria-hidden="true"></div>
         <div class="quiz-intro__glow quiz-intro__glow--2" aria-hidden="true"></div>
+        <figure class="quiz-intro__pane quiz-intro__pane--left" aria-hidden="true">
+          <picture>
+            <source srcset="img/quiz/quiz-left.webp" type="image/webp">
+            <img src="img/quiz/quiz-left.png" width="413" height="377" alt="">
+          </picture>
+        </figure>
         <div class="quiz-intro__inner">
           <h2 class="quiz-intro__title">Подбор банной печи</h2>
           <p class="quiz-intro__text">Введите параметры парной&nbsp;&mdash; калькулятор определит расчётный объём и&nbsp;подберёт подходящую печь ЖарGO.</p>
           <button class="btn-reset quiz-intro__cta" type="button" data-quiz-start>Начать подбор&nbsp;&rarr;</button>
         </div>
-        <button class="btn-reset quiz-intro__help" type="button" aria-label="Справка по подбору">?</button>
+        <figure class="quiz-intro__pane quiz-intro__pane--right" aria-hidden="true">
+          <picture>
+            <source srcset="img/quiz/quiz-right.webp" type="image/webp">
+            <img src="img/quiz/quiz-right.png" width="413" height="377" alt="">
+          </picture>
+        </figure>
+        <button class="btn-reset quiz-intro__help" type="button" data-graph-path="quiz-hint" aria-label="Справка по подбору">?</button>
       </section>
 
       <div class="quiz__flow" data-quiz-flow hidden>
@@ -71,16 +83,13 @@
                 <p class="quiz-fields__legend">Внутренние размеры, м</p>
                 <div class="quiz-fields__row quiz-fields__row--3">
                   <label class="quiz-field">
-                    <span class="quiz-field__hint">Длина</span>
-                    <input class="input-reset quiz-field__input" type="text" name="quiz-length" inputmode="decimal" placeholder="" autocomplete="off" required>
+                    <input class="input-reset quiz-field__input" type="text" name="quiz-length" inputmode="decimal" placeholder="Длина" autocomplete="off" required>
                   </label>
                   <label class="quiz-field">
-                    <span class="quiz-field__hint">Ширина</span>
-                    <input class="input-reset quiz-field__input" type="text" name="quiz-width" inputmode="decimal" placeholder="" autocomplete="off" required>
+                    <input class="input-reset quiz-field__input" type="text" name="quiz-width" inputmode="decimal" placeholder="Ширина" autocomplete="off" required>
                   </label>
                   <label class="quiz-field">
-                    <span class="quiz-field__hint">Высота</span>
-                    <input class="input-reset quiz-field__input" type="text" name="quiz-height" inputmode="decimal" placeholder="" autocomplete="off" required>
+                    <input class="input-reset quiz-field__input" type="text" name="quiz-height" inputmode="decimal" placeholder="Высота" autocomplete="off" required>
                   </label>
                 </div>
               </div>
@@ -226,36 +235,39 @@
 
           <div class="quiz__step quiz__step--result quiz__step--result-success" data-quiz-result-panel="success" hidden>
             <div class="quiz-result-success">
-              <div class="quiz__step-head">
-                <h3 class="quiz__step-title">Подобранные модели</h3>
-                <p class="quiz__step-desc">По&nbsp;вашим параметрам мы&nbsp;нашли подходящие печи ЖарGO.</p>
-                <p class="quiz-result-volume">Расчётный объём парной: <strong data-quiz-result-volume>—</strong></p>
+              <div class="quiz__step-head quiz__step-head--result">
+                <h3 class="quiz__step-title">Результат</h3>
               </div>
+              <div class="quiz-result-summary" data-quiz-result-summary></div>
+              <hr class="quiz-result-divider">
+              <p class="quiz-result-volume">Расчетный объем: <strong data-quiz-result-volume>—</strong></p>
+              <hr class="quiz-result-divider">
+              <p class="quiz-result-success__heading">Подходящие печи ЖарGO</p>
               <ul class="quiz-result-success__list list-reset" data-quiz-result-list></ul>
             </div>
           </div>
 
           <div class="quiz__step quiz__step--result quiz__step--result-empty" data-quiz-result-panel="empty" hidden>
             <div class="quiz-result-empty">
-              <div class="quiz__step-head quiz__step-head--compact">
-                <h3 class="quiz__step-title">Нет подходящих моделей в каталоге</h3>
-                <p class="quiz__step-desc">Мы производим печи на&nbsp;собственном заводе в&nbsp;Нижнем Новгороде. Не все конфигурации попадают в&nbsp;типовой каталог, но&nbsp;это не значит, что их&nbsp;нет.</p>
+              <div class="quiz-result-empty__head">
+                <h3 class="quiz-result-empty__title">Нет подходящих моделей в каталоге</h3>
+                <p class="quiz-result-empty__desc">Мы производим печи на&nbsp;собственном заводе в&nbsp;Нижнем Новгороде. Не все конфигурации попадают в&nbsp;типовой каталог, но&nbsp;это не значит, что их&nbsp;нет.</p>
               </div>
               <div class="quiz-result-empty__cta">
-                <p class="quiz-result-empty__cta-title">📞 Свяжитесь с менеджером&nbsp;&mdash; подберем печь за&nbsp;10 минут</p>
+                <p class="quiz-result-empty__cta-title">📞 Свяжитесь с менеджером&nbsp;&mdash; подберём печь за&nbsp;10 минут</p>
                 <div class="quiz-result-empty__contacts">
                   <a class="quiz-result-empty__phone" href="tel:+78005005442">8&nbsp;(800)&nbsp;500-54-42</a>
                   <ul class="quiz-result-empty__social list-reset">
                     <li>
                       <a class="quiz-result-empty__social-link" href="#" aria-label="MAX">
-                        <svg width="24" height="24" aria-hidden="true">
+                        <svg class="quiz-result-empty__social-icon" width="24" height="24" aria-hidden="true">
                           <use href="img/sprite.svg#logo-max"></use>
                         </svg>
                       </a>
                     </li>
                     <li>
                       <a class="quiz-result-empty__social-link" href="#" aria-label="Telegram">
-                        <svg width="24" height="24" aria-hidden="true">
+                        <svg class="quiz-result-empty__social-icon" width="24" height="24" aria-hidden="true">
                           <use href="img/sprite.svg#logo-tg"></use>
                         </svg>
                       </a>
