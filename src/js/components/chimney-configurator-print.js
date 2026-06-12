@@ -1,33 +1,8 @@
-export const QUIZ_LABELS = {
-  wall: {
-    vagon: 'Вагонка / утеплённые',
-    breven: 'Брёвна / толстый брус',
-  },
-  saunaType: {
-    russian: 'Русская баня',
-    finnish: 'Финская сауна',
-  },
-  firebox: {
-    ktk: 'КТК (из парной)',
-    vynos: 'Выносная (из предбанника)',
-  },
-  door: {
-    glass: 'Со стеклом',
-    plain: 'Без стекла',
-  },
-  material: {
-    stal: 'Конструкционная сталь',
-    chugun: 'Чугун',
-  },
-};
-
 const DISCLAIMER_PARAGRAPHS = [
-  'Калькулятор подбора помогает определить расчётный объём парной и подобрать подходящие модели печей ЖарGO.',
-  'Рекомендации носят предварительный характер. Для уточнения комплектации, монтажа и дымохода обратитесь к специалисту.',
-  'Актуальные цены, наличие и технические характеристики уточняйте у менеджера или на официальном сайте.',
+  'Данный подбор дымоходной системы является предварительным и носит ориентировочный характер.',
+  'Для точного подбора состава системы, уточнения количества элементов и согласования монтажного решения обратитесь к менеджерам ЖарGO.',
+  'Мы поможем подобрать дымоход любой сложности и конфигурации.',
 ];
-
-const DEFAULT_MODEL_DESCRIPTION = 'Универсальная сталь. Подходит для обоих типов парной.';
 
 const resolveAssetUrl = (path) => {
   if (!path || path.startsWith('http')) {
@@ -47,55 +22,16 @@ const getSiteLabel = () => {
   return host;
 };
 
-const formatDimensions = (answers, volume) => {
-  return `${answers.length}×${answers.width}×${answers.height} м (${volume} м³)`;
-};
-
-const formatUninsulated = (answers) => {
-  return answers.uninsulatedArea > 0 ? `${answers.uninsulatedArea} м²` : '0 м²';
-};
-
-export const getQuizModelDescription = (model) => {
-  if (model.description) {
-    return model.description;
+const getItemNote = (name, index) => {
+  if (index === 0) {
+    return 'Первый элемент от печи';
   }
 
-  if (model.id === 'taganay-22') {
-    return 'Сталь. Для просторных парных и смешанного режима.';
+  if (name === 'ППУ') {
+    return 'Проходной узел';
   }
 
-  return DEFAULT_MODEL_DESCRIPTION;
-};
-
-const buildParamRow = (label, value) => {
-  return `
-    <div class="param-row">
-      <span class="param-row__label">${label}</span>
-      <span class="param-row__value">${value}</span>
-    </div>
-  `;
-};
-
-const buildModelsHtml = (models) => {
-  return models.map((model) => {
-    const description = getQuizModelDescription(model);
-    const details = model.details ?? '';
-
-    return `
-      <article class="model-row">
-        <div class="model-row__image">
-          <img src="${resolveAssetUrl(model.image)}" alt="${model.title}" width="215" height="150">
-        </div>
-        <div class="model-row__content">
-          <div class="model-row__head">
-            <h3 class="model-row__title">${model.title}</h3>
-            <p class="model-row__desc">${description}</p>
-          </div>
-          ${details ? `<p class="model-row__details">${details}</p>` : ''}
-        </div>
-      </article>
-    `;
-  }).join('');
+  return '';
 };
 
 const buildPrintStyles = () => {
@@ -189,7 +125,7 @@ const buildPrintStyles = () => {
 
     .pdf__body {
       flex: 1;
-      padding: 39px 0 0;
+      padding: 39px 10px 0;
     }
 
     .pdf__section-head {
@@ -217,138 +153,130 @@ const buildPrintStyles = () => {
     }
 
     .pdf__section-head__title {
-      flex: 0 0 auto;
+      flex: 0 1 auto;
       margin: 0;
+      max-width: 534px;
       font-weight: 500;
       font-size: 30px;
       line-height: 1.2;
       text-align: center;
+      text-transform: uppercase;
       color: #363636;
-      white-space: nowrap;
     }
 
-    .pdf__result {
+    .pdf__content {
       display: flex;
-      flex-direction: column;
-      gap: 15px;
+      align-items: flex-start;
+      gap: 40px;
       margin-bottom: 60px;
     }
 
-    .pdf__params {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-      font-size: 16px;
-      line-height: 1.4;
-    }
-
-    .pdf__params-col {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .param-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      align-items: baseline;
-    }
-
-    .param-row__label {
-      color: #585858;
-      font-weight: 400;
-    }
-
-    .param-row__value {
-      color: #363636;
-      font-weight: 500;
-    }
-
-    .pdf__divider {
-      height: 1px;
-      margin: 0;
-      background: rgba(218, 218, 218, 0.4);
-    }
-
-    .pdf__volume {
-      display: flex;
-      gap: 10px;
-      margin: 0;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 1.4;
-    }
-
-    .pdf__volume-value {
-      color: #ed7407;
-    }
-
-    .pdf__subtitle {
-      margin: 0;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 1.4;
-      color: rgba(54, 54, 54, 0.6);
-    }
-
-    .pdf__models {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .model-row {
-      display: flex;
-      gap: 15px;
-      align-items: flex-start;
-    }
-
-    .model-row__image {
+    .pdf__scheme {
       flex-shrink: 0;
-      border-radius: 10px;
+      width: 375px;
     }
 
-    .model-row__image img {
+    .pdf__scheme img {
       display: block;
-      width: 215px;
-      height: 150px;
+      width: 375px;
+      height: auto;
+      max-height: 450px;
       object-fit: contain;
     }
 
-    .model-row__content {
+    .pdf__result {
       flex: 1;
       min-width: 0;
-    }
-
-    .model-row__head {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-bottom: 15px;
+      gap: 15px;
     }
 
-    .model-row__title {
-      margin: 0;
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 1.2;
+    .pdf__chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
     }
 
-    .model-row__desc {
-      margin: 0;
-      color: #585858;
+    .pdf__chip {
+      border-radius: 1000px;
+      padding: 5px 10px;
       font-weight: 400;
       font-size: 16px;
       line-height: 1.4;
+      color: #585858;
+      background-color: #f4f4f4;
     }
 
-    .model-row__details {
+    .pdf__lists {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .pdf__list-block {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
       margin: 0;
-      color: #585858;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pdf__item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border-radius: 4px;
+      padding: 8px 20px;
+      min-height: 66px;
+      background-color: #f4f4f4;
+    }
+
+    .pdf__item-num {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      width: 29px;
+      height: 29px;
       font-weight: 400;
+      font-size: 16px;
+      line-height: 1;
+      color: #fff;
+      background-color: #ed7407;
+    }
+
+    .pdf__item-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .pdf__item-name {
+      font-weight: 500;
       font-size: 18px;
-      line-height: 1.3;
+      line-height: 1.4;
+      color: #363636;
+    }
+
+    .pdf__item-note {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.4;
+      color: #585858;
+    }
+
+    .pdf__item-qty {
+      flex-shrink: 0;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 1.4;
+      color: #ed7407;
+      white-space: nowrap;
     }
 
     .pdf__notes {
@@ -433,23 +361,45 @@ const buildPrintStyles = () => {
   `;
 };
 
-const buildPrintHtml = ({ answers, volume, models }) => {
+const buildItemHtml = (item, index) => {
+  const note = getItemNote(item.name, index);
+  const noteHtml = note ? `<span class="pdf__item-note">${note}</span>` : '';
+
+  return `
+    <li class="pdf__item">
+      <span class="pdf__item-num">${index + 1}</span>
+      <span class="pdf__item-body">
+        <span class="pdf__item-name">${item.name}</span>
+        ${noteHtml}
+      </span>
+      <span class="pdf__item-qty">${item.quantity} шт</span>
+    </li>
+  `;
+};
+
+const buildListHtml = (items) => {
+  const midpoint = Math.ceil(items.length / 2);
+  const blocks = [
+    items.slice(0, midpoint),
+    items.slice(midpoint),
+  ];
+
+  return blocks.map((blockItems, blockIndex) => {
+    const offset = blockIndex === 0 ? 0 : midpoint;
+
+    return `
+      <ol class="pdf__list-block">
+        ${blockItems.map((item, index) => buildItemHtml(item, offset + index)).join('')}
+      </ol>
+    `;
+  }).join('');
+};
+
+const buildPrintHtml = ({ schemeTitle, chips, items, schemeId }) => {
   const logoUrl = resolveAssetUrl('img/logo-pdf.svg');
   const siteLabel = getSiteLabel();
-
-  const leftParams = [
-    buildParamRow('Размеры:', formatDimensions(answers, volume)),
-    buildParamRow('Материал стен:', QUIZ_LABELS.wall[answers.wallMaterial] ?? '—'),
-    buildParamRow('Топка:', QUIZ_LABELS.firebox[answers.firebox] ?? '—'),
-    buildParamRow('Неутеплённые поверхности:', formatUninsulated(answers)),
-  ].join('');
-
-  const rightParams = [
-    buildParamRow('Тип парной:', QUIZ_LABELS.saunaType[answers.saunaType] ?? '—'),
-    buildParamRow('Материал печи:', QUIZ_LABELS.material[answers.material] ?? '—'),
-    buildParamRow('Дверца:', QUIZ_LABELS.door[answers.door] ?? '—'),
-  ].join('');
-
+  const schemeImageUrl = resolveAssetUrl(`img/chimneys/scheme-${schemeId}.svg`);
+  const chipsHtml = chips.map((chip) => `<span class="pdf__chip">${chip}</span>`).join('');
   const notesHtml = DISCLAIMER_PARAGRAPHS.map((text) => `<p>${text}</p>`).join('');
 
   const phoneIcon = `
@@ -468,7 +418,7 @@ const buildPrintHtml = ({ answers, volume, models }) => {
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Подбор банной печи — результат</title>
+  <title>Конфигуратор дымохода — результат</title>
   <style>${buildPrintStyles()}</style>
 </head>
 <body>
@@ -486,28 +436,18 @@ const buildPrintHtml = ({ answers, volume, models }) => {
     <main class="pdf__body">
       <div class="pdf__section-head">
         <span class="pdf__section-head__line pdf__section-head__line--left" aria-hidden="true"></span>
-        <h2 class="pdf__section-head__title">Результат</h2>
+        <h2 class="pdf__section-head__title">${schemeTitle}</h2>
         <span class="pdf__section-head__line pdf__section-head__line--right" aria-hidden="true"></span>
       </div>
 
-      <div class="pdf__result">
-        <div class="pdf__params">
-          <div class="pdf__params-col">${leftParams}</div>
-          <div class="pdf__params-col">${rightParams}</div>
+      <div class="pdf__content">
+        <div class="pdf__scheme">
+          <img src="${schemeImageUrl}" alt="" width="375" height="450">
         </div>
-
-        <div class="pdf__divider" aria-hidden="true"></div>
-
-        <p class="pdf__volume">
-          <span>Расчетный объем:</span>
-          <span class="pdf__volume-value">${volume} м³</span>
-        </p>
-
-        <div class="pdf__divider" aria-hidden="true"></div>
-
-        <p class="pdf__subtitle">Подходящие печи ЖарGO</p>
-
-        <div class="pdf__models">${buildModelsHtml(models)}</div>
+        <div class="pdf__result">
+          <div class="pdf__chips">${chipsHtml}</div>
+          <div class="pdf__lists">${buildListHtml(items)}</div>
+        </div>
       </div>
 
       <div class="pdf__notes">${notesHtml}</div>
@@ -562,11 +502,11 @@ const removePrintFrame = (frame) => {
   frame?.parentNode?.removeChild(frame);
 };
 
-export const printQuizResult = ({ answers, volume, models }) => {
-  removePrintFrame(document.getElementById('quiz-print-frame'));
+export const printChimneyResult = ({ schemeTitle, chips, items, schemeId }) => {
+  removePrintFrame(document.getElementById('chimney-print-frame'));
 
   const frame = document.createElement('iframe');
-  frame.id = 'quiz-print-frame';
+  frame.id = 'chimney-print-frame';
   frame.setAttribute('aria-hidden', 'true');
   frame.style.cssText = 'position:fixed;left:-9999px;top:0;width:1160px;height:1700px;border:0;';
   document.body.appendChild(frame);
@@ -575,7 +515,7 @@ export const printQuizResult = ({ answers, volume, models }) => {
   const printDocument = printWindow.document;
 
   printDocument.open();
-  printDocument.write(buildPrintHtml({ answers, volume, models }));
+  printDocument.write(buildPrintHtml({ schemeTitle, chips, items, schemeId }));
   printDocument.close();
 
   const startPrint = () => {

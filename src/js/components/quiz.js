@@ -1,6 +1,6 @@
 import { QUIZ_STOVES } from '../data/quiz-stoves.js';
 import { calculateVolume, matchStoves } from './quiz-calc.js';
-import { printQuizResult } from './quiz-print.js';
+import { getQuizModelDescription, printQuizResult, QUIZ_LABELS } from './quiz-print.js';
 
 const parseDecimal = (value) => {
   const normalized = String(value).trim().replace(',', '.');
@@ -46,23 +46,63 @@ const collectAnswers = (quiz) => {
   };
 };
 
+const formatResultDimensions = (answers, volume) => {
+  return `${answers.length}×${answers.width}×${answers.height} м (${volume} м³)`;
+};
+
+const formatResultUninsulated = (answers) => {
+  return answers.uninsulatedArea > 0 ? `${answers.uninsulatedArea} м²` : '0 м²';
+};
+
+const renderResultSummary = (summaryEl, answers, volume) => {
+  if (!summaryEl) {
+    return;
+  }
+
+  const rows = [
+    ['Размеры:', formatResultDimensions(answers, volume)],
+    ['Материал стен:', QUIZ_LABELS.wall[answers.wallMaterial] ?? '—'],
+    ['Топка:', QUIZ_LABELS.firebox[answers.firebox] ?? '—'],
+    ['Неутеплённые поверхности:', formatResultUninsulated(answers)],
+    ['Тип парной:', QUIZ_LABELS.saunaType[answers.saunaType] ?? '—'],
+  ];
+
+  const buildRow = ([label, value]) => `
+    <p class="quiz-result-summary__row">
+      <span class="quiz-result-summary__label">${label}</span>
+      <span class="quiz-result-summary__value">${value}</span>
+    </p>
+  `;
+
+  summaryEl.innerHTML = `
+    <div class="quiz-result-summary__col">
+      ${rows.slice(0, 3).map(buildRow).join('')}
+    </div>
+    <div class="quiz-result-summary__col">
+      ${rows.slice(3).map(buildRow).join('')}
+    </div>
+  `;
+};
+
 const renderResultCards = (listEl, models) => {
   listEl.innerHTML = models.map((model, index) => {
-    const badge = index === 0
+    const isFeatured = index === 0;
+    const badge = isFeatured
       ? '<span class="quiz-result-card__badge">Рекомендуем</span>'
       : '';
+    const description = getQuizModelDescription(model);
 
     return `
-      <li>
-        <article class="quiz-result-card">
+      <li class="quiz-result-card${isFeatured ? ' quiz-result-card--featured' : ''}">
+        ${badge}
+        <article class="quiz-result-card__inner">
           <a class="quiz-result-card__link" href="${model.url}">
-            ${badge}
             <picture class="quiz-result-card__pic">
               <source srcset="${model.imageWebp}" type="image/webp">
-              <img src="${model.image}" width="120" height="100" alt="">
+              <img class="quiz-result-card__img" src="${model.image}" width="215" height="150" alt="">
             </picture>
-            <span class="quiz-result-card__title">Печь для бани «${model.title}»</span>
-            <span class="quiz-result-card__more">Подробнее&nbsp;&rarr;</span>
+            <span class="quiz-result-card__title">${model.title}</span>
+            <span class="quiz-result-card__desc">${description}</span>
           </a>
         </article>
       </li>
@@ -84,6 +124,7 @@ const initQuiz = () => {
   const resultSuccessEl = quiz.querySelector('[data-quiz-result-panel="success"]');
   const resultEmptyEl = quiz.querySelector('[data-quiz-result-panel="empty"]');
   const resultListEl = quiz.querySelector('[data-quiz-result-list]');
+  const resultSummaryEl = quiz.querySelector('[data-quiz-result-summary]');
   const resultVolumeEl = quiz.querySelector('[data-quiz-result-volume]');
   const startBtn = quiz.querySelector('[data-quiz-start]');
   const prevBtn = quiz.querySelector('[data-quiz-prev]');
@@ -208,6 +249,10 @@ const initQuiz = () => {
     const hasResults = models.length > 0;
 
     lastResult = hasResults ? { answers, volume, models } : null;
+
+    if (hasResults) {
+      renderResultSummary(resultSummaryEl, answers, volume);
+    }
 
     if (resultVolumeEl) {
       resultVolumeEl.textContent = `${volume} м³`;
