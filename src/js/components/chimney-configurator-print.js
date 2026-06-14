@@ -5,11 +5,13 @@ const DISCLAIMER_PARAGRAPHS = [
 ];
 
 const resolveAssetUrl = (path) => {
-  if (!path || path.startsWith('http')) {
+  if (!path || path.startsWith('http://') || path.startsWith('https://')) {
     return path;
   }
 
-  return new URL(path, `${window.location.origin}/`).href;
+  const baseUrl = document.querySelector('base')?.href ?? window.location.href;
+
+  return new URL(path, baseUrl).href;
 };
 
 const getSiteLabel = () => {
@@ -378,10 +380,11 @@ const buildItemHtml = (item, index) => {
 };
 
 const buildListHtml = (items) => {
-  const midpoint = Math.ceil(items.length / 2);
+  const visibleItems = items.filter((item) => item.quantity > 0);
+  const midpoint = Math.ceil(visibleItems.length / 2);
   const blocks = [
-    items.slice(0, midpoint),
-    items.slice(midpoint),
+    visibleItems.slice(0, midpoint),
+    visibleItems.slice(midpoint),
   ];
 
   return blocks.map((blockItems, blockIndex) => {

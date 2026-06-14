@@ -335,6 +335,10 @@ $c-quiz-hint-bg: #f4f4f4;
     flex-direction: column;
     gap: 10px;
 
+    &[hidden] {
+      display: none !important;
+    }
+
     &--narrow {
       flex: 0 0 auto;
       width: 100%;
@@ -539,8 +543,10 @@ $c-quiz-hint-bg: #f4f4f4;
 
   &__img {
     display: block;
-    width: 100px;
+    width: auto;
+    max-width: 108px;
     height: 120px;
+    object-fit: contain;
   }
 
   &__input:focus-visible + .chimney-scheme-card__box {

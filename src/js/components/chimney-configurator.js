@@ -40,9 +40,15 @@ const isHeightValid = (value) => {
 };
 
 const isFloorsValid = (value) => {
-  const num = parseInteger(value);
+  const normalized = String(value).trim();
 
-  return num !== null && num >= 0 && num <= 5;
+  if (!/^\d+$/.test(normalized)) {
+    return false;
+  }
+
+  const num = Number.parseInt(normalized, 10);
+
+  return num >= 0 && num <= 5;
 };
 
 const getCheckedValue = (root, name) => {
@@ -61,18 +67,6 @@ const getSchemeContextLabel = (generatorId, hasTank) => {
   }
 
   return title;
-};
-
-const getItemNote = (name, index) => {
-  if (index === 0) {
-    return 'Первый элемент от печи';
-  }
-
-  if (name === 'ППУ') {
-    return 'Проходной узел';
-  }
-
-  return '';
 };
 
 const collectAnswers = (root) => {
@@ -156,6 +150,18 @@ const renderResultScheme = (schemeEl, answers) => {
   return label;
 };
 
+const getItemNote = (name, index) => {
+  if (index === 0) {
+    return 'Первый элемент от печи';
+  }
+
+  if (name === 'ППУ') {
+    return 'Проходной узел';
+  }
+
+  return '';
+};
+
 const buildResultItemHtml = (item, index) => {
   const note = getItemNote(item.name, index);
   const noteHtml = note
@@ -175,10 +181,11 @@ const buildResultItemHtml = (item, index) => {
 };
 
 const renderResultList = (listCols, items) => {
-  const midpoint = Math.ceil(items.length / 2);
+  const visibleItems = items.filter((item) => item.quantity > 0);
+  const midpoint = Math.ceil(visibleItems.length / 2);
   const columns = [
-    items.slice(0, midpoint),
-    items.slice(midpoint),
+    visibleItems.slice(0, midpoint),
+    visibleItems.slice(midpoint),
   ];
 
   listCols.forEach((listEl, columnIndex) => {
@@ -580,6 +587,10 @@ const initChimneyConfigurator = () => {
 
   paramInputs.forEach((input) => {
     input.addEventListener('input', () => {
+      if (input.name === 'chimney-floors') {
+        input.value = input.value.replace(/\D/g, '').slice(0, 1);
+      }
+
       if (!showingIntro && !showingResult && stepIndex === 2) {
         renderActions();
       }

@@ -30,11 +30,13 @@ const DISCLAIMER_PARAGRAPHS = [
 const DEFAULT_MODEL_DESCRIPTION = 'Универсальная сталь. Подходит для обоих типов парной.';
 
 const resolveAssetUrl = (path) => {
-  if (!path || path.startsWith('http')) {
+  if (!path || path.startsWith('http://') || path.startsWith('https://')) {
     return path;
   }
 
-  return new URL(path, `${window.location.origin}/`).href;
+  const baseUrl = document.querySelector('base')?.href ?? window.location.href;
+
+  return new URL(path, baseUrl).href;
 };
 
 const getSiteLabel = () => {
