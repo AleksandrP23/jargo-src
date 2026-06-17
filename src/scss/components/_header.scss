@@ -12,6 +12,10 @@
     width: 100%;
   }
 
+  &--menu-open {
+    z-index: 1001;
+  }
+
   &__inner {
     position: relative;
     margin-right: calc(0px - var(--container-offset));
@@ -23,7 +27,7 @@
     z-index: 55;
 
     @include tablet {
-      display: contents;
+      display: block;
     }
   }
 
@@ -309,7 +313,7 @@
     display: none;
   }
 
-  &--menu-open .menu__panel-desktop {
+  &--menu-open .menu__panel .menu__panel-desktop {
     display: block;
   }
 
@@ -379,14 +383,10 @@
       display: none;
     }
 
-    .menu__panel-touch {
-      display: none;
+    &--menu-open .menu__panel .menu__panel-touch {
+      display: flex;
       flex-direction: column;
       min-height: 100%;
-    }
-
-    &--menu-open .menu__panel-touch {
-      display: flex;
     }
 
     &--scrolled .header__inner {
@@ -1126,4 +1126,8 @@
     border-bottom: none;
     background-color: rgb(237 116 7 / 10%);
   }
+}
+
+.graph-modal:not(.is-open) {
+  pointer-events: none;
 }
