@@ -43,6 +43,7 @@ import { closeHeaderSearch } from '../components/header-search.js';
 
       if (isOpen) {
         closeHeaderSearch();
+        window.graphModal?.close?.();
         header?.classList.add('header--menu-open');
         setPanelHidden(false);
         disableScroll();
