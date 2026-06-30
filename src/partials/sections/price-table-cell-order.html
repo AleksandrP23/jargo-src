@@ -1,0 +1,25 @@
+<div class="price-table__cell-order" data-price-cell-order>
+  <span class="price-table__cell-value">198&nbsp;₽</span>
+  <button class="price-table__order-trigger btn-reset" type="button" aria-label="Добавить в заявку" aria-expanded="false" data-price-order-trigger>
+    <svg class="price-table__order-icon icon" width="12" height="12" aria-hidden="true">
+      <use href="img/sprite.svg#price-order-bag"></use>
+    </svg>
+  </button>
+  <div class="price-order-popover" data-price-order-popover hidden>
+    <div class="price-order-popover__inner">
+      <p class="price-order-popover__label">введите количество</p>
+      <div class="price-order-popover__controls">
+        <div class="price-order-stepper" data-price-order-stepper>
+          <button class="price-order-stepper__btn price-order-stepper__btn--minus btn-reset" type="button" aria-label="Уменьшить">
+            <span class="price-order-stepper__icon price-order-stepper__icon--minus" aria-hidden="true"></span>
+          </button>
+          <input class="price-order-stepper__input" type="number" value="10" min="1" inputmode="numeric" aria-label="Количество">
+          <button class="price-order-stepper__btn price-order-stepper__btn--plus btn-reset" type="button" aria-label="Увеличить">
+            <span class="price-order-stepper__icon price-order-stepper__icon--plus" aria-hidden="true"></span>
+          </button>
+        </div>
+        <button class="price-order-popover__submit btn-reset" type="button">В&nbsp;заявку</button>
+      </div>
+    </div>
+  </div>
+</div>
