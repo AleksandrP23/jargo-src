@@ -30,24 +30,34 @@
     color: #eee;
   }
 
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    @include desktop {
+      gap: 0;
+    }
+  }
+
   &__links {
     display: flex;
     gap: 20px;
+  }
 
-    .tabs__nav-btn {
-      font-size: 18px;
-      line-height: 1.2;
-      text-decoration: underline;
-      text-decoration-color: #ed7407;
-      color: #fff;
-      transition: color 0.15s ease, text-decoration-color 0.15s ease;
-      text-underline-offset: 2px;
+  &__link {
+    font-size: 18px;
+    line-height: 1.2;
+    text-decoration: underline;
+    text-decoration-color: #ed7407;
+    color: #fff;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+    text-underline-offset: 2px;
 
-      &:hover,
-      &:focus-visible {
-        text-decoration-color: #fff;
-        color: #ed7407;
-      }
+    &:hover,
+    &:focus-visible {
+      text-decoration-color: #fff;
+      color: #ed7407;
     }
   }
 
@@ -145,7 +155,7 @@
       font-size: 16px;
     }
 
-    &__links .tabs__nav-btn {
+    &__link {
       font-size: 16px;
     }
 
@@ -228,25 +238,3 @@
   }
 }
 
-.production-tabs {
-  .tabs__content {
-    margin-bottom: 30px;
-
-    @include desktop {
-      margin-bottom: 0;
-    }
-  }
-
-  .tabs__panel {
-    display: none;
-  }
-
-  .tabs__panel--active {
-    display: block;
-  }
-
-  .tabs__nav-btn--active {
-    text-decoration-color: #fff;
-    color: #ed7407;
-  }
-}
