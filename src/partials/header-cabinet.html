@@ -1,0 +1,49 @@
+<header class="header header--auth">
+  <div class="container">
+    <div class="header__inner">
+      <div class="header__top">
+        <ul class="header__links list-reset">
+          <li><a href="#">Стать дилером</a></li>
+          <li><a href="#">Интернет-магазин</a></li>
+          <li><a href="#">Где купить?</a></li>
+          <li><a href="#">Академия</a></li>
+        </ul>
+        <a class="header__logo" href="#" aria-label="На главную">
+          <img src="img/logo.svg" width="65" height="65" alt="ЖарGo">
+        </a>
+        <div class="header__actions">
+          <div class="header__contacts">
+            <a class="header__phone" href="tel:88005005442">
+              <span class="header__phone-text">8 (800) 500-54-42</span>
+              <svg class="header__phone-icon icon" width="24" height="24" aria-hidden="true">
+                <use href="img/sprite.svg#phone"></use>
+              </svg>
+            </a>
+            <span>Звонок по России бесплатный</span>
+          </div>
+          <ul class="header__social list-reset">
+            <li>
+              <a href="#" aria-label="Max">
+                <svg class="icon icon--max" width="24" height="24" aria-hidden="true">
+                  <use href="img/sprite.svg#logo-max"></use>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-label="Telegram">
+                <svg class="icon icon--tg" width="24" height="24" aria-hidden="true">
+                  <use href="img/sprite.svg#logo-tg"></use>
+                </svg>
+              </a>
+            </li>
+          </ul>
+          @include('./header-tools-auth.html')
+          <button class="burger burger--top btn-reset" type="button" aria-label="Открыть меню" aria-expanded="false" data-burger>
+            <span class="burger__line"></span>
+          </button>
+        </div>
+      </div>
+      @include('./header-body.html')
+    </div>
+  </div>
+</header>
