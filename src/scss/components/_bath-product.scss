@@ -83,109 +83,18 @@
     color: rgb(208 208 208 / 55%);
   }
 
-  .product-rotate {
-    outline: none;
-    border-radius: 0;
-    width: 100%;
-    max-width: 515px;
-    cursor: grab;
-    touch-action: none;
-    user-select: none;
-
-    &.is-dragging {
-      cursor: grabbing;
-    }
-
-    &.product-rotate--reduced-motion {
-      cursor: default;
-    }
-  }
-
-  .product-rotate__visual {
-    position: relative;
-    overflow: visible;
-    width: 100%;
-    max-width: 515px;
-  }
-
-  .product-rotate__viewport {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    touch-action: none;
-    user-select: none;
-    aspect-ratio: 515 / 274;
-  }
-
-  .product-rotate__glow {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 0;
-    border-radius: 50%;
-    width: 90%;
-    height: 110%;
-    background: rgb(234 226 226 / 10%);
-    filter: blur(48px);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-
-  .product-rotate__layers {
+  .bath-product-hero__image {
     position: relative;
     z-index: 1;
     width: 100%;
-    height: 100%;
-  }
-
-  .product-rotate__layer {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-
-    &.is-active {
-      z-index: 1;
-      opacity: 1;
-    }
+    max-width: 515px;
+    aspect-ratio: 515 / 274;
 
     img {
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  .product-rotate.product-rotate--reduced-motion .product-rotate__layer {
-    transition: none;
-  }
-
-  .product-rotate__hint {
-    display: block;
-    margin: 18px auto 0;
-    border: 0;
-    padding: 0;
-    width: max-content;
-    max-width: 100%;
-    background: transparent;
-    cursor: pointer;
-
-    &:focus-visible {
-      outline: 2px solid #ed7407;
-      outline-offset: 3px;
-      border-radius: 4px;
-    }
-
-    img {
-      display: block;
-      flex-shrink: 0;
-      width: 60px;
-      height: 60px;
-      pointer-events: none;
+      object-fit: contain;
     }
   }
 
@@ -197,9 +106,7 @@
       max-width: 100%;
     }
 
-    .product-rotate,
-    .product-rotate__visual,
-    .product-rotate__viewport {
+    .bath-product-hero__image {
       max-width: 100%;
     }
   }
@@ -266,20 +173,9 @@
         font-size: 16px;
       }
 
-      .product-rotate {
+      .bath-product-hero__image {
         width: 100%;
-      }
-
-      .product-rotate,
-      .product-rotate__visual,
-      .product-rotate__viewport {
         max-width: none;
-      }
-
-      .product-rotate__visual {
-        width: 100%;
-        margin-right: 0;
-        margin-left: 0;
       }
     }
   }
@@ -350,23 +246,9 @@
       font-size: 14px;
     }
 
-    .product-rotate,
-    .product-rotate__visual {
+    .bath-product-hero__image {
       max-width: 270px;
-    }
-
-    .product-rotate__visual {
-      margin-right: auto;
-      margin-left: auto;
-    }
-
-    .product-rotate__viewport {
       aspect-ratio: 335 / 178;
-    }
-
-    .product-rotate__hint img {
-      width: 30px;
-      height: 30px;
     }
   }
 }
