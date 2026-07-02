@@ -9,7 +9,6 @@ import './components/article-toc.js';
 import './components/article-gallery.js';
 import './components/article-showcase.js';
 import './components/chimneys-hero-slider.js';
-import './components/product-rotate.js';
 import './components/article-tooltips.js';
 import './components/article-maps.js';
 import initCatalogToolbar from './components/catalog-toolbar.js';
