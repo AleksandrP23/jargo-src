@@ -351,16 +351,20 @@
         gap: 8px;
       }
 
+      span {
+        color: #fff;
+        opacity: 0.6;
+        transition: opacity 0.15s ease, color 0.15s ease;
+      }
+
       button {
         color: #fff;
+        transition: color 0.15s ease;
 
-        &:hover,
         &:focus-visible {
-          color: #fff;
-
-          .icon--search {
-            stroke: #fff;
-          }
+          outline: 2px solid #ed7407;
+          outline-offset: 2px;
+          border-radius: 2px;
         }
       }
 
@@ -370,39 +374,69 @@
 
       .icon--search {
         stroke: #fff;
+        transition: stroke 0.15s ease;
       }
 
       .icon--account,
       .icon--price,
       .icon--request {
         fill: #fff;
+        transition: fill 0.15s ease;
       }
 
-      span {
+      .header__tool-link {
         color: #fff;
-      }
-    }
+        text-decoration: none;
 
-    .header__tool-link {
-      color: #fff;
-      text-decoration: none;
-      transition: opacity 0.15s ease;
-
-      span {
-        font-size: 13px;
-        line-height: 1.2;
-        opacity: 0.6;
+        &:focus-visible {
+          outline: 2px solid #fff;
+          outline-offset: 2px;
+          border-radius: 2px;
+        }
       }
 
-      &:hover,
-      &:focus-visible {
-        opacity: 0.85;
+      button,
+      .header__tools-item:not(.header__tools-item--dealer) .header__tool-link {
+        &:hover,
+        &:focus-visible {
+          span {
+            opacity: 1;
+            color: #ed7407;
+          }
+        }
       }
 
-      &:focus-visible {
-        outline: 2px solid #fff;
-        outline-offset: 2px;
-        border-radius: 2px;
+      button {
+        &:hover,
+        &:focus-visible {
+          .icon--search {
+            stroke: #ed7407;
+          }
+        }
+      }
+
+      .header__tools-item:not(.header__tools-item--dealer) .header__tool-link {
+        &:hover,
+        &:focus-visible {
+          .icon--account {
+            fill: #ed7407;
+          }
+        }
+      }
+
+      .header__tools-item--dealer .header__tool-link {
+        &:hover,
+        &:focus-visible {
+          span {
+            opacity: 1;
+            color: #133a2d;
+          }
+
+          .icon--price,
+          .icon--request {
+            fill: #133a2d;
+          }
+        }
       }
     }
   }
@@ -716,16 +750,54 @@
     gap: 10px;
   }
 
+  &__field {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    min-width: 0;
+  }
+
+  &__caret {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    color: #585858;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+    transform: translateY(-50%);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &__field:not(.is-empty) &__caret {
+    display: none;
+  }
+
   &__input {
     flex: 1;
+    width: 100%;
     min-width: 0;
+    border: none;
+    padding: 0;
     font-size: 16px;
-    line-height: 1.25;
-    color: #363636;
+    line-height: 1.2;
+    color: #585858;
+    caret-color: #585858;
+    outline: none;
+    box-shadow: none;
 
-    &::placeholder {
-      color: #585858;
+    &:focus,
+    &:focus-visible {
+      outline: none;
+      box-shadow: none;
     }
+  }
+
+  &__field.is-empty &__input {
+    padding-left: 10px;
+    caret-color: transparent;
   }
 
   &__submit {
@@ -735,8 +807,16 @@
     line-height: 1.2;
     white-space: nowrap;
     text-decoration: underline;
+    text-decoration-color: #ed7407;
     color: #363636;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
     text-underline-offset: 2px;
+
+    &:hover,
+    &:focus-visible {
+      color: #ed7407;
+      text-decoration-color: #ed7407;
+    }
 
     &:focus-visible {
       outline: 2px solid #ed7407;
@@ -1096,6 +1176,7 @@
   &__footer {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     margin-top: auto;
     padding-top: 8px;
     gap: 16px;
@@ -1104,8 +1185,8 @@
   &__contacts {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     gap: 0;
   }
 
@@ -1124,7 +1205,7 @@
 
   &__social {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 16px;
 
     a {
@@ -1135,7 +1216,7 @@
 
       .icon--max,
       .icon--tg {
-        fill: #585858;
+        fill: #ed7407;
         transition: fill 0.15s ease;
       }
 
@@ -1143,7 +1224,7 @@
       &:focus-visible {
         .icon--max,
         .icon--tg {
-          fill: #ed7407;
+          fill: #585858;
         }
       }
 
@@ -1195,7 +1276,7 @@
   }
 }
 
-// Скрыто на текущей вёрстке; раскрыть на странице с категориями (см. header-scroll.js)
+// Полоса категорий при скролле — только на странице прайса (см. header-scroll.js)
 .header-scroll {
   display: none;
 
@@ -1341,6 +1422,10 @@
     border-bottom: none;
     background-color: rgb(237 116 7 / 10%);
   }
+}
+
+.page__body--price .header--scrolled .header-scroll {
+  display: block;
 }
 
 .graph-modal:not(.is-open) {
