@@ -187,6 +187,24 @@ const initHeaderScrollOverflow = () => {
 
   moreWrap.addEventListener('click', (e) => e.stopPropagation());
 
+  const header = document.querySelector('.header');
+
+  if (header && document.body.classList.contains('page__body--price')) {
+    let balanceTick = false;
+
+    window.addEventListener('scroll', () => {
+      if (!header.classList.contains('header--scrolled') || balanceTick) {
+        return;
+      }
+
+      balanceTick = true;
+      requestAnimationFrame(() => {
+        balanceTick = false;
+        balance();
+      });
+    }, { passive: true });
+  }
+
   balance();
 };
 

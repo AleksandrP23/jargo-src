@@ -3,7 +3,12 @@ const panel = document.querySelector('[data-header-search]');
 const toggles = document.querySelectorAll('[data-header-search-toggle]');
 const closeBtns = document.querySelectorAll('[data-header-search-close]');
 const input = document.querySelector('[data-header-search-input]');
+const field = document.querySelector('[data-header-search-field]');
 const form = panel?.querySelector('.header-search__form');
+
+const syncSearchFieldState = () => {
+  field?.classList.toggle('is-empty', !input?.value);
+};
 
 export const closeHeaderSearch = () => {
   if (!panel || !header) {
@@ -34,6 +39,7 @@ const openHeaderSearch = () => {
     btn.setAttribute('aria-expanded', 'true');
   });
   input?.focus();
+  syncSearchFieldState();
 };
 
 const toggleSearch = () => {
@@ -66,3 +72,5 @@ document.addEventListener('keydown', (e) => {
 form?.addEventListener('submit', (e) => {
   e.preventDefault();
 });
+
+input?.addEventListener('input', syncSearchFieldState);
