@@ -2,7 +2,10 @@
         <div class="header-search__shell">
           <form class="header-search__form" action="#" method="get">
             <label class="visually-hidden" for="header-search-input">Поиск по сайту</label>
-            <input id="header-search-input" class="header-search__input input-reset" type="search" name="q" placeholder="Поиск по сайту" autocomplete="off" data-header-search-input>
+            <div class="header-search__field is-empty" data-header-search-field>
+              <span class="header-search__caret" aria-hidden="true">|</span>
+              <input id="header-search-input" class="header-search__input input-reset" type="search" name="q" autocomplete="off" data-header-search-input>
+            </div>
             <button class="header-search__submit btn-reset" type="submit">Найти</button>
             <button class="header-search__close btn-reset" type="button" aria-label="Закрыть поиск" data-header-search-close>
               <svg width="25" height="25" viewBox="0 0 22 22" aria-hidden="true">
@@ -233,7 +236,7 @@
           </div>
         </div>
       </div>
-      <div class="header-scroll" aria-hidden="true">
+      <div class="header-scroll">
         <div class="header-scroll__bar" data-header-scroll-bar>
           <ul class="header-scroll__list header-scroll__list--main list-reset" data-header-scroll-main>
             <li class="header-scroll__item">
