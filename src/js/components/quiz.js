@@ -117,7 +117,6 @@ const initQuiz = () => {
     return;
   }
 
-  const introEl = quiz.querySelector('[data-quiz-intro]');
   const flowEl = quiz.querySelector('[data-quiz-flow]');
   const stepperEl = quiz.querySelector('[data-quiz-stepper]');
   const formSteps = Array.from(quiz.querySelectorAll('[data-quiz-form-step]'));
@@ -126,7 +125,6 @@ const initQuiz = () => {
   const resultListEl = quiz.querySelector('[data-quiz-result-list]');
   const resultSummaryEl = quiz.querySelector('[data-quiz-result-summary]');
   const resultVolumeEl = quiz.querySelector('[data-quiz-result-volume]');
-  const startBtn = quiz.querySelector('[data-quiz-start]');
   const prevBtn = quiz.querySelector('[data-quiz-prev]');
   const nextBtn = quiz.querySelector('[data-quiz-next]');
   const againBtn = quiz.querySelector('[data-quiz-again]');
@@ -139,7 +137,6 @@ const initQuiz = () => {
   const doorPlainInput = quiz.querySelector('input[name="quiz-door"][value="plain"]');
   const dimensionInputs = quiz.querySelectorAll('[name="quiz-length"], [name="quiz-width"], [name="quiz-height"]');
 
-  let showingIntro = true;
   /** @type {number} 0..2 — шаги анкеты, 3 — экран результата */
   let stepIndex = 0;
   let showingResult = false;
@@ -168,34 +165,7 @@ const initQuiz = () => {
     }
   };
 
-  const showIntroView = () => {
-    showingIntro = true;
-    showingResult = false;
-    stepIndex = 0;
-
-    introEl?.removeAttribute('hidden');
-    flowEl?.setAttribute('hidden', '');
-
-    if (resultSuccessEl) {
-      resultSuccessEl.hidden = true;
-      resultSuccessEl.classList.remove('quiz__step--active');
-    }
-
-    if (resultEmptyEl) {
-      resultEmptyEl.hidden = true;
-      resultEmptyEl.classList.remove('quiz__step--active');
-    }
-
-    formSteps.forEach((el, i) => {
-      el.classList.toggle('quiz__step--active', i === 0);
-    });
-
-    setPhase(0);
-  };
-
   const showFlowView = () => {
-    showingIntro = false;
-    introEl?.setAttribute('hidden', '');
     flowEl?.removeAttribute('hidden');
   };
 
@@ -280,10 +250,6 @@ const initQuiz = () => {
       return;
     }
 
-    if (showingIntro) {
-      return;
-    }
-
     if (showingResult) {
       const hasSuccessResult = Boolean(lastResult);
 
@@ -330,12 +296,6 @@ const initQuiz = () => {
   };
 
   const render = () => {
-    if (showingIntro) {
-      showIntroView();
-      renderActions();
-      return;
-    }
-
     showFlowView();
 
     if (showingResult) {
@@ -356,7 +316,7 @@ const initQuiz = () => {
   };
 
   const goNext = () => {
-    if (showingIntro || showingResult) {
+    if (showingResult) {
       return;
     }
 
@@ -375,10 +335,6 @@ const initQuiz = () => {
   };
 
   const goPrev = () => {
-    if (showingIntro) {
-      return;
-    }
-
     if (showingResult) {
       showingResult = false;
       stepIndex = 2;
@@ -411,8 +367,8 @@ const initQuiz = () => {
     resetDefaults();
     showingResult = false;
     lastResult = null;
-    showIntroView();
-    renderActions();
+    stepIndex = 0;
+    render();
   };
 
   const printResult = () => {
@@ -422,13 +378,6 @@ const initQuiz = () => {
 
     printQuizResult(lastResult);
   };
-
-  startBtn?.addEventListener('click', () => {
-    showingIntro = false;
-    showingResult = false;
-    stepIndex = 0;
-    render();
-  });
 
   nextBtn?.addEventListener('click', goNext);
   prevBtn?.addEventListener('click', goPrev);
@@ -449,7 +398,7 @@ const initQuiz = () => {
 
   dimensionInputs.forEach((input) => {
     input.addEventListener('input', () => {
-      if (!showingIntro && !showingResult && stepIndex === 0) {
+      if (!showingResult && stepIndex === 0) {
         renderActions();
       }
     });
